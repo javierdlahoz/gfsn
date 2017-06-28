@@ -5,6 +5,7 @@ var wrongCredentials = "#loginWrongCredentials";
 var localFiles = [];
 var localProductId = null;
 var userLoggedIn = false;
+var isValidated = false;
 
 document.addEventListener('DOMContentLoaded', function(){ 
   jQuery(formId).submit(function(event) {
@@ -27,21 +28,35 @@ function getFilesAndDownload(productId) {
 	});
 }
 
-function downloadFiles(productId, nonce) {
+function retryDownloadFiles() {
+	jQuery("#subscribeModal").modal('hide');
+	downloadFiles(localProductId);	
+}
+
+function downloadFiles(productId) {
 	localProductId = productId;
 
 	if(userLoggedIn) {
 		getFilesAndDownload(productId);
 	} else {
 		var url = '/wp-json/gfsn-api/membership/logged-in';
+
 		jQuery.get(url, function(data) {
-			if(data.validated) {
-				userLoggedIn = true;
-				getFilesAndDownload(productId);
+			if (data.success) {
+				isValidated = data.validated;
+				if(data.validated) {
+					userLoggedIn = true;
+					getFilesAndDownload(productId);
+				}
+				else {
+					jQuery("#notValidated").show();
+					jQuery("#subscribeForm").hide();
+					jQuery("#subscribeModal").modal();
+				}
 			}
-		})
-		.fail(function(data) {
-			jQuery("#subscribeModal").modal();
+			else {
+				jQuery("#subscribeModal").modal();	
+			}
 		});
 	}
 }
@@ -81,7 +96,7 @@ function createUser(user){
 
 		setTimeout(function() {
 			closeSubscribtionModal();
-		}, 5000);
+		}, 3000);
 		
 	})
 	.fail(function(data) {

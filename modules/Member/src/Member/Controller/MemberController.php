@@ -67,9 +67,9 @@ class MemberController {
 
 	public function isLoggedIn() {
 		$cUser = wp_get_current_user();
-		if ($cUser) {
+		if ($cUser->ID > 0) {
 			$validated = get_user_meta($cUser->ID, self::VALIDATED, true);
-			return array('message' => 'Member already logged in', 'validated' => $validated);
+			return array('message' => 'Member already logged in', 'validated' => $validated, 'success' => true);
 		} else {
 			wp_send_json_error(array('message' => 'User not logged in'));
 		}

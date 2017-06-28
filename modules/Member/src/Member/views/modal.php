@@ -3,14 +3,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Subscribe</h4>
+        <h4 class="modal-title">Download Files</h4>
       </div>
       <div class="modal-body">
 
       	<div class="alert alert-warning" id="modalWait" style="display: none">Please wait</div>
 
+      	<div id="notValidated" style="display: none">
+      		<p>Your account hasn't been validated yet, please check your email and validate your account</p>
+      		<button class="btn btn-success" onclick="retryDownloadFiles()">Retry</button>
+      	</div>
+
 	  		<form id="subscribeForm">
-	        <p>Subscribtion is free, just introduce yout email address</p>
+	        <p>Subscribtion is free, just introduce your email address</p>
           <div class="form-group">
 				    <label for="email">Email address:</label>
 				    <input type="email" class="form-control" id="email" required="required">
