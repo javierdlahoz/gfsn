@@ -2,6 +2,8 @@ angular.module('gfsn', []).factory('MemberService', MemberService);
 
 function MemberService($http) {
 	var baseUrl = '/wp-json/gfsn-api/membership';
+	var contentType = {'Content-Type': 'application/x-www-form-urlencoded'};
+
 	return {
 		
 		isLoggedIn: function(nonce, callback) {
@@ -17,10 +19,10 @@ function MemberService($http) {
 			$http({
         url: baseUrl,
         method: "POST",
-        data: angular.element.param(user),
-        headers: getContentTypes().form
+        data: jQuery.param(user),
+        headers: contentType
       }).then(function (response) {
-        return callBack(response.data);
+      	return callback(response.data);
       });
 		},
 
@@ -28,8 +30,8 @@ function MemberService($http) {
 			$http({
         url: baseUrl + '/login',
         method: "POST",
-        data: angular.element.param(credentials),
-        headers: getContentTypes().form
+        data: jQuery.param(credentials),
+        headers: contentType
       }).then(function (response) {
         return callBack(response.data);
       });

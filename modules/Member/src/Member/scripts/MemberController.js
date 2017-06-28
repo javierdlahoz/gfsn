@@ -11,6 +11,9 @@ function MemberController($scope, MemberService) {
 	vm.subscriber = {email: null};
 	vm.tab = 'subscribe';
 	vm.messageToShow = false;
+	vm.retryMessage = false;
+	vm.warningMessage = null;
+	vm.wrongCredentials = false;
 
 	vm.downloadFiles = function(productId, nonce) {
 		vm.localProductId = productId;
@@ -24,30 +27,51 @@ function MemberController($scope, MemberService) {
 	}
 
 	vm.createUser = function() {
+		vm.initializeForms();
+		vm.messageToShow = true;
+		vm.warningMessage = 'Please wait';
+
 		vm.MemberService.createUser(vm.subscriber, function(response) {
-			console.log(response);
+			vm.warningMessage = null;
+			vm.userLoggedIn = true;
+			vm.validated = response.validated;
+			vm.handleDownloads();
 		});
 	}
 
 	vm.login = function() {
+		vm.initializeForms();
 		vm.MemberService.login(vm.user, function(response) {
-			console.log(response);
+			if (response.success) {
+				vm.validated = response.validated;
+				vm.handleDownloads();
+			} else {
+				vm.wrongCredentials = true;
+			}
 		});
 	}
 
 	vm.isLoggedIn = function() {
+		vm.initializeForms();
 		vm.MemberService.isLoggedIn(vm.nonce, function(response) {
 			if (response.success) { 
 				vm.validated = response.validated;
 				vm.userLoggedIn = true;
-				if(response.validated) {
-					vm.getFilesAndDownload();
-				}
+				vm.handleDownloads();
 			} else {
 				vm.userLoggedIn = false;
 				jQuery("#subscribeModal").modal();
 			}
 		});
+	}
+
+	vm.handleDownloads = function() {
+		if(vm.validated) {
+			vm.getFilesAndDownload();
+		} else {
+			vm.messageToShow = true;
+			vm.retryMessage = true;
+		}
 	}
 
 	vm.getFilesAndDownload = function() {
@@ -64,5 +88,11 @@ function MemberController($scope, MemberService) {
 		link.download = file;
 		document.body.appendChild(link);
 		link.click();
+	}
+
+	vm.initializeForms = function() {
+		vm.retryMessage = false;
+		vm.warningMessage = null;
+		vm.messageToShow = false;
 	}
 }

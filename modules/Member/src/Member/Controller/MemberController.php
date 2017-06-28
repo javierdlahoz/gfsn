@@ -35,7 +35,7 @@ class MemberController {
 			update_user_meta($user, self::VALIDATED, false);
 			update_user_meta($user, self::INITIAL_PASSWORD, $password);
 
-			$this->sendConfirmEmail($_POST['email'], $uniqueToken);
+			$this->sendConfirmEmail($_POST['email'], $uniqueToken, $password);
 
 			wp_signon(array('user_login' => $_POST['email'], 'user_password' => $password, 'remember' => true), false);
 			return array('message' => 'Member successfully subscribed', 'validated' => false);
@@ -94,11 +94,12 @@ class MemberController {
 		}
 	}
 
-	private function sendConfirmEmail($email, $token) {
+	private function sendConfirmEmail($email, $token, $password) {
 		$headers = 'From: info <'.get_option('admin_email').'>';
 		$to = $email;
 		$subject = get_option('blogname').' Confirm your email';
-		$message = '<h2>Thank you for subscribe.</h2><br> Please click on <a href="'.home_url('/').'?email_token='.$token.'">confirm</a> to continue';
+		$message = '<h2>Thank you for subscribe.</h2><p> Your temporary password is: <b>'.$password.'</b></p>';
+		$message .= '<p>Please click on <a href="'.home_url('/').'?email_token='.$token.'">confirm</a> to continue</p>';
 		MemberHelper::send($to, $subject, $message, $headers);		
 	}
 }
