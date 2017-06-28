@@ -6,12 +6,16 @@ function MemberService($http) {
 
 	return {
 		
-		isLoggedIn: function(nonce, callback) {
+		isLoggedIn: function(callback) {
 			$http({
-        url: baseUrl + '/logged-in?_wpnonce=' + nonce,
+        url: baseUrl + '/logged-in?_wpnonce=' + ajaxObject.nonce,
         method: "GET"
       }).then(function (response) {
         return callback(response.data);
+      }).catch(function (error) {
+      	if (error.status === 403) {
+      		window.location.href = '?action=download';
+      	}
       });
 		},
 
@@ -46,12 +50,16 @@ function MemberService($http) {
       });
 		},
 
-		resendEmail: function(nonce, callback) {
+		resendEmail: function(callback) {
 			$http({
-        url: baseUrl + '/resend-email?_wpnonce=' + nonce,
+        url: baseUrl + '/resend-email?_wpnonce=' + ajaxObject.nonce,
         method: "GET"
       }).then(function (response) {
         return callback(response.data);
+      }).catch(function (error) {
+      	if (error.status === 403) {
+      		window.location.href = '?action=download';
+      	}
       });
 		}
 	}

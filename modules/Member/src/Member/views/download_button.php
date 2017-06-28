@@ -3,8 +3,8 @@
 	if($product->get_downloadable()):
 ?>
 <div ng-app='gfsn' ng-controller="MemberController as vm" ng-cloak>
-	<button class="btn btn-success btn-download" type="button" 
-		ng-click='vm.downloadFiles(<?php echo $product->get_id(); ?>, "<?php echo wp_create_nonce('wp_rest'); ?>")'>
+	<button class="btn btn-success btn-download" type="button" id="downloadProductButton"
+		ng-click='vm.downloadFiles(<?php echo $product->get_id(); ?>)'>
 		Download
 	</button>
 	<?php include __DIR__. '/modal.php'; ?>

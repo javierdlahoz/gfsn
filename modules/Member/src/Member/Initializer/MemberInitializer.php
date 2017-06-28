@@ -101,11 +101,19 @@ class MemberInitializer {
 		return $val;
 	}
 
+	private function setAjaxNonce() {
+		$params = array(
+		  'nonce' => wp_create_nonce('wp_rest')
+		);
+		wp_localize_script('gfsn-member-service', 'ajaxObject', $params);
+	}
+
 	private function enqueScripts() {
 		wp_enqueue_script('angularjs', plugin_dir_url( __FILE__ ) . '../scripts/angular.min.js');
 		wp_enqueue_script('gfsn-main', plugin_dir_url( __FILE__ ) . '../scripts/main.js');
 		wp_enqueue_script('gfsn-member-service', plugin_dir_url( __FILE__ ) . '../scripts/MemberService.js');
 		wp_enqueue_script('gfsn-member-controller', plugin_dir_url( __FILE__ ) . '../scripts/MemberController.js');
+		$this->setAjaxNonce();
 	}
 
 	private function enqueStyles() {

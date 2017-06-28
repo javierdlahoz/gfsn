@@ -6,7 +6,6 @@ function MemberController($scope, MemberService) {
 	vm.validated = false;
 	vm.localProductId = null;
 	vm.userLoggedIn = false;
-	vm.nonce = null;
 	vm.user = {email: null, password: null};
 	vm.subscriber = {email: null};
 	vm.tab = 'subscribe';
@@ -15,10 +14,17 @@ function MemberController($scope, MemberService) {
 	vm.warningMessage = null;
 	vm.wrongCredentials = false;
 	vm.warningMessageType = 'warning';
+	
+	vm.initialize = function() {
+		if (vm.getParameterByName('action') === 'download') {
+			jQuery(document).ready(function() {
+				jQuery("#downloadProductButton").click();
+			});
+		}
+	}
 
-	vm.downloadFiles = function(productId, nonce) {
+	vm.downloadFiles = function(productId) {
 		vm.localProductId = productId;
-		vm.nonce = nonce;
 
 		if (vm.userLoggedIn) {
 			if (vm.validated) {
@@ -61,7 +67,7 @@ function MemberController($scope, MemberService) {
 			vm.initializeForms();	
 		}
 		
-		vm.MemberService.isLoggedIn(vm.nonce, function(response) {
+		vm.MemberService.isLoggedIn(function(response) {
 			vm.warningMessage = false;
 			if (response.success) { 
 				vm.validated = response.validated;
@@ -110,7 +116,7 @@ function MemberController($scope, MemberService) {
 
 	vm.resendEmail = function() {
 		vm.warningMessage = 'Please wait';
-		vm.MemberService.resendEmail(vm.nonce, function(response) {
+		vm.MemberService.resendEmail(function(response) {
 			vm.warningMessageType = 'success';
 			vm.warningMessage = 'Email sent, please check your email inbox';
 		});
@@ -131,4 +137,16 @@ function MemberController($scope, MemberService) {
 			jQuery("#subscribeModal").modal('hide');
 		}
 	}
+
+	vm.getParameterByName = function(name) {
+    var url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	vm.initialize();
 }
