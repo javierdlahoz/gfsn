@@ -12,7 +12,7 @@
 
 	      	<div ng-show="vm.retryMessage">
 	      		<p>Your account hasn't been validated yet, please check your email and validate your account</p>
-	      		<button class="btn btn-success" onclick="retryDownloadFiles()">Retry</button>
+	      		<button class="btn btn-success" ng-click="vm.retryDownloadFiles()">Retry</button>
 	      	</div>
 	      </div>
       	
@@ -27,18 +27,18 @@
 					  <button type="submit" class="btn btn-success">Subscribe</button>
 				  </form>
 
-				  <form ng-show="vm.tab == 'login'">
+				  <form ng-show="vm.tab == 'login'" ng-submit="vm.login()">
 		        <div class="form-group">
 					    <label for="email">Email address:</label>
-					    <input type="email" class="form-control" id="login_email" required="required">
+					    <input type="email" class="form-control" ng-model="vm.user.email" required="required">
 					  </div>
 	          <div class="form-group">
 					    <label for="password">Password:</label>
-					    <input type="password" class="form-control" id="login_password" minLength="5" required="required">
+					    <input type="password" class="form-control" ng-model="vm.user.password" minLength="5" required="required">
 					  </div>
+					  <div class="alert alert-danger" ng-show="vm.wrongCredentials">Wrong Credentials</div>
 					  <p><a href="#" ng-click="vm.tab = 'subscribe'">Subscribe as a new member</a></p>
 					  <p><a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a></p>
-					  <div class="alert alert-danger" id="loginWrongCredentials" style="display: none">Wrong Credentials</div>
 					  <button type="submit" class="btn btn-success">Login</button>
 				  </form>
       	</div>

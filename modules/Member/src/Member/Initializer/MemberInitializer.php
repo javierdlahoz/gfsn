@@ -12,6 +12,7 @@ class MemberInitializer {
 		$this->memberController = new MemberController();
 		add_action('wp_loaded', array(&$this, 'initializePlugin'));
 		add_filter('wp_mail_content_type', array(&$this, 'setEmailsAsHtml'));
+		add_action('wp_print_scripts', array(&$this, 'removePasswordStrenght'), 100);
 		
 		add_action('rest_api_init', function() {
 			register_rest_route( 'gfsn-api', '/membership', array(
@@ -55,6 +56,12 @@ class MemberInitializer {
 
 	public function setEmailsAsHtml() {
 		return 'text/html';
+	}
+
+	public function removePasswordStrenght() {
+		if (wp_script_is( 'wc-password-strength-meter', 'enqueued')) {
+			wp_dequeue_script('wc-password-strength-meter');
+		}
 	}
 
 	private function enqueScripts() {

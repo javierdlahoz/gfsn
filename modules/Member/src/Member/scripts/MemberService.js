@@ -33,7 +33,7 @@ function MemberService($http) {
         data: jQuery.param(credentials),
         headers: contentType
       }).then(function (response) {
-        return callBack(response.data);
+        return callback(response.data);
       });
 		},
 

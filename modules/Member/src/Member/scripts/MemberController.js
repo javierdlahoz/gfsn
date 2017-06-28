@@ -7,7 +7,7 @@ function MemberController($scope, MemberService) {
 	vm.localProductId = null;
 	vm.userLoggedIn = false;
 	vm.nonce = null;
-	vm.user = {user_login: null, user_password: null};
+	vm.user = {email: null, password: null};
 	vm.subscriber = {email: null};
 	vm.tab = 'subscribe';
 	vm.messageToShow = false;
@@ -19,8 +19,12 @@ function MemberController($scope, MemberService) {
 		vm.localProductId = productId;
 		vm.nonce = nonce;
 
-		if(vm.userLoggedIn) {
-			vm.getFilesAndDownload(productId);
+		if (vm.userLoggedIn) {
+			if (vm.validated) {
+				vm.getFilesAndDownload(productId);	
+			} else {
+				vm.handleDownloads();
+			}
 		} else {
 			vm.isLoggedIn();
 		}
@@ -51,9 +55,13 @@ function MemberController($scope, MemberService) {
 		});
 	}
 
-	vm.isLoggedIn = function() {
-		vm.initializeForms();
+	vm.isLoggedIn = function(restartForms = true) {
+		if (restartForms) {
+			vm.initializeForms();	
+		}
+		
 		vm.MemberService.isLoggedIn(vm.nonce, function(response) {
+			vm.warningMessage = false;
 			if (response.success) { 
 				vm.validated = response.validated;
 				vm.userLoggedIn = true;
@@ -68,6 +76,7 @@ function MemberController($scope, MemberService) {
 	vm.handleDownloads = function() {
 		if(vm.validated) {
 			vm.getFilesAndDownload();
+			vm.toogleModal(false);
 		} else {
 			vm.messageToShow = true;
 			vm.retryMessage = true;
@@ -91,7 +100,14 @@ function MemberController($scope, MemberService) {
 		link.click();
 	}
 
+	vm.retryDownloadFiles = function() {
+		vm.messageToShow = true;
+		vm.warningMessage = 'Please wait';
+		vm.isLoggedIn(false);
+	}
+
 	vm.initializeForms = function() {
+		vm.wrongCredentials = false;
 		vm.retryMessage = false;
 		vm.warningMessage = null;
 		vm.messageToShow = false;
