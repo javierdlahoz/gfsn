@@ -29,8 +29,6 @@ class MemberController {
 		$user = wp_create_user($_POST['email'], $password, $_POST['email']);
 	
 		if ($user) {
-			wp_new_user_notification($user, $password);
-
 			update_user_meta($user, self::UNIQUE_TOKEN, $uniqueToken);
 			update_user_meta($user, self::VALIDATED, false);
 			update_user_meta($user, self::INITIAL_PASSWORD, $password);
@@ -73,6 +71,18 @@ class MemberController {
 			return array('message' => 'Member already logged in', 'validated' => (bool) $validated, 'success' => true);
 		} else {
 			wp_send_json_error(array('message' => 'User not logged in'));
+		}
+	}
+
+	public function resendEmail() {
+		$user = wp_get_current_user();
+		if (!is_wp_error($user)) {
+			$password = get_user_meta($user->ID, self::INITIAL_PASSWORD, true);	
+			$token = get_user_meta($user->ID, self::UNIQUE_TOKEN, true);
+			$this->sendConfirmEmail($user->user_email, $token, $password);
+			return array('success' => true, 'message' => 'Email Sent');
+		} else {
+			wp_send_json_error(array('message' => 'There is no user with this email'));
 		}
 	}
 

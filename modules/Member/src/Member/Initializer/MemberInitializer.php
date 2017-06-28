@@ -36,6 +36,13 @@ class MemberInitializer {
 		});
 
 		add_action('rest_api_init', function() {
+			register_rest_route( 'gfsn-api', '/membership/resend-email', array(
+				'methods' => 'GET',
+				'callback' => array(&$this->memberController, 'resendEmail'),
+			));
+		});
+
+		add_action('rest_api_init', function() {
 			register_rest_route( 'gfsn-api', '/membership/login', array(
 				'methods' => 'POST',
 				'callback' => array(&$this->memberController, 'login'),

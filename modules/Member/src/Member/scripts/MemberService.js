@@ -44,6 +44,15 @@ function MemberService($http) {
       }).then(function (response) {
         return callback(response.data);
       });
+		},
+
+		resendEmail: function(nonce, callback) {
+			$http({
+        url: baseUrl + '/resend-email?_wpnonce=' + nonce,
+        method: "GET"
+      }).then(function (response) {
+        return callback(response.data);
+      });
 		}
 	}
 }

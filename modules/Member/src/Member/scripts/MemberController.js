@@ -14,6 +14,7 @@ function MemberController($scope, MemberService) {
 	vm.retryMessage = false;
 	vm.warningMessage = null;
 	vm.wrongCredentials = false;
+	vm.warningMessageType = 'warning';
 
 	vm.downloadFiles = function(productId, nonce) {
 		vm.localProductId = productId;
@@ -102,8 +103,17 @@ function MemberController($scope, MemberService) {
 
 	vm.retryDownloadFiles = function() {
 		vm.messageToShow = true;
+		vm.warningMessageType = 'warning';
 		vm.warningMessage = 'Please wait';
 		vm.isLoggedIn(false);
+	}
+
+	vm.resendEmail = function() {
+		vm.warningMessage = 'Please wait';
+		vm.MemberService.resendEmail(vm.nonce, function(response) {
+			vm.warningMessageType = 'success';
+			vm.warningMessage = 'Email sent, please check your email inbox';
+		});
 	}
 
 	vm.initializeForms = function() {
@@ -111,6 +121,7 @@ function MemberController($scope, MemberService) {
 		vm.retryMessage = false;
 		vm.warningMessage = null;
 		vm.messageToShow = false;
+		vm.warningMessageType = 'warning';
 	}
 
 	vm.toogleModal = function(show = true) {

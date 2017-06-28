@@ -4,7 +4,7 @@
  * Plugin Name: Great Free Stuffs for Non-profit Plugin
  * Plugin URI: https://local.gfsn.com/
  * Description: Custom build
- * Version: 1.0
+ * Version: 1.1
  * Author: GFSN
  * Requires at least: 4.4
  * Tested up to: 4.8

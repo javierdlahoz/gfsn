@@ -8,11 +8,12 @@
       <div class="modal-body">
 
 	      <div ng-show="vm.messageToShow">
-	      	<div class="alert alert-warning" ng-show="vm.warningMessage">{{vm.warningMessage}}</div>
+	      	<div class="alert alert-{{vm.warningMessageType}}" ng-show="vm.warningMessage">{{vm.warningMessage}}</div>
 
 	      	<div ng-show="vm.retryMessage">
 	      		<p>Your account hasn't been validated yet, please check your email and validate your account</p>
 	      		<button class="btn btn-success" ng-click="vm.retryDownloadFiles()">Retry</button>
+	      		<button class="btn btn-primary" ng-click="vm.resendEmail()">Resend Email</button>
 	      	</div>
 	      </div>
       	
