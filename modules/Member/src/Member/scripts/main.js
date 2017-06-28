@@ -33,13 +33,13 @@ function retryDownloadFiles() {
 	downloadFiles(localProductId);	
 }
 
-function downloadFiles(productId) {
+function downloadFiles(productId, nonce) {
 	localProductId = productId;
 
 	if(userLoggedIn) {
 		getFilesAndDownload(productId);
 	} else {
-		var url = '/wp-json/gfsn-api/membership/logged-in';
+		var url = '/wp-json/gfsn-api/membership/logged-in?_wpnonce=' + nonce;
 
 		jQuery.get(url, function(data) {
 			if (data.success) {
