@@ -60,7 +60,7 @@ function MemberController($scope, MemberService) {
 				vm.handleDownloads();
 			} else {
 				vm.userLoggedIn = false;
-				jQuery("#subscribeModal").modal();
+				vm.toogleModal();
 			}
 		});
 	}
@@ -71,6 +71,7 @@ function MemberController($scope, MemberService) {
 		} else {
 			vm.messageToShow = true;
 			vm.retryMessage = true;
+			vm.toogleModal();
 		}
 	}
 
@@ -94,5 +95,13 @@ function MemberController($scope, MemberService) {
 		vm.retryMessage = false;
 		vm.warningMessage = null;
 		vm.messageToShow = false;
+	}
+
+	vm.toogleModal = function(show = true) {
+		if (show) {
+			jQuery("#subscribeModal").modal();	
+		} else {
+			jQuery("#subscribeModal").modal('hide');
+		}
 	}
 }
