@@ -31,11 +31,11 @@
 				  <form ng-show="vm.tab == 'login'" ng-submit="vm.login()">
 		        <div class="form-group">
 					    <label for="email">Email address:</label>
-					    <input type="email" class="form-control" ng-model="vm.user.email" required="required">
+					    <input type="email" class="form-control" ng-model="vm.user.email" required="required" name="email">
 					  </div>
 	          <div class="form-group">
 					    <label for="password">Password:</label>
-					    <input type="password" class="form-control" ng-model="vm.user.password" minLength="5" required="required">
+					    <input type="password" class="form-control" ng-model="vm.user.password" minLength="5" required="required" name="password">
 					  </div>
 					  <div class="alert alert-danger" ng-show="vm.wrongCredentials">Wrong Credentials</div>
 					  <p><a href="#" ng-click="vm.tab = 'subscribe'">Subscribe as a new member</a></p>

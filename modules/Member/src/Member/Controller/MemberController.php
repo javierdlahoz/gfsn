@@ -23,7 +23,7 @@ class MemberController {
 			return array('message' => 'Member already registered', 'validated' => $validated);
 		}
 
-		$password = wp_generate_password();
+		$password = wp_generate_password(6);
 		$uniqueToken = uniqid();
 		
 		$user = wp_create_user($_POST['email'], $password, $_POST['email']);
