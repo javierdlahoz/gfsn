@@ -19,7 +19,7 @@ class MemberController {
 	public function subscribe() {
 		$user = get_user_by('email', $_POST['email']);
 		if ($user) {
-			$validated = get_user_meta($user->ID, self::VALIDATED, true);
+			$validated = $this->isUserValidated($user->ID);
 			return array('message' => 'Member already registered', 'validated' => $validated);
 		}
 
@@ -57,7 +57,7 @@ class MemberController {
 	public function login() {
 		$user = wp_signon(array('user_login' => $_POST['email'], 'user_password' => $_POST['password'], 'remember' => true), false);
 		if (!is_wp_error($user)) {
-			$validated = get_user_meta($user->ID, self::VALIDATED, true);
+			$validated = $this->isUserValidated($user->ID);
 			return array('message' => 'Member successfully logged in', 'success' => true, 'validated' => $validated);
 		} else {
 			wp_send_json_error(array('message' => 'Wrong credentials'));
@@ -67,7 +67,7 @@ class MemberController {
 	public function isLoggedIn() {
 		$cUser = wp_get_current_user();
 		if ($cUser->ID > 0) {
-			$validated = get_user_meta($cUser->ID, self::VALIDATED, true);
+			$validated = $this->isUserValidated($cUser->ID);
 			return array('message' => 'Member already logged in', 'validated' => (bool) $validated, 'success' => true);
 		} else {
 			wp_send_json_error(array('message' => 'User not logged in'));
@@ -84,6 +84,13 @@ class MemberController {
 		} else {
 			wp_send_json_error(array('message' => 'There is no user with this email'));
 		}
+	}
+
+	public function isUserValidated($userId) {
+		if (user_can($userId, 'administrator')) {
+			return true;
+		}
+		return (bool) get_user_meta($userId, self::VALIDATED, true);
 	}
 
 	private function getMembershipPlanId() {
@@ -113,4 +120,5 @@ class MemberController {
 		$message .= '<p>Please click on <a href="'.home_url('/').'?email_token='.$token.'">confirm</a> to continue</p>';
 		MemberHelper::send($to, $subject, $message, $headers);		
 	}
+
 }
