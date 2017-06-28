@@ -9,6 +9,8 @@ function MemberController($scope, MemberService) {
 	vm.nonce = null;
 	vm.user = {user_login: null, user_password: null};
 	vm.subscriber = {email: null};
+	vm.tab = 'subscribe';
+	vm.messageToShow = false;
 
 	vm.downloadFiles = function(productId, nonce) {
 		vm.localProductId = productId;
@@ -43,6 +45,7 @@ function MemberController($scope, MemberService) {
 				}
 			} else {
 				vm.userLoggedIn = false;
+				jQuery("#subscribeModal").modal();
 			}
 		});
 	}

@@ -9,7 +9,7 @@ var localProductId = null;
 var userLoggedIn = false;
 var isValidated = false;
 
-document.addEventListener('DOMContentLoaded', function(){ 
+/*document.addEventListener('DOMContentLoaded', function(){ 
   jQuery(formId).submit(function(event) {
 		event.preventDefault();
 		subscribeUser(jQuery(formId));
@@ -141,4 +141,4 @@ function showRegistrationForm() {
 function showWaitMessage() {
 	jQuery("#modalWait").show();
 	jQuery("#subscribeForm").hide();	
-}
+}*/
