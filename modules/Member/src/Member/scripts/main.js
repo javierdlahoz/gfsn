@@ -1,3 +1,5 @@
+angular.module('gfsn', []);
+
 var formId = "#subscribeForm";
 var loginFormId = "#loginForm";
 var subscritionSuccess = "#subscritionSuccess";

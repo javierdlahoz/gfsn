@@ -58,12 +58,10 @@ class MemberInitializer {
 	}
 
 	private function enqueScripts() {
+		wp_enqueue_script('angularjs', plugin_dir_url( __FILE__ ) . '../scripts/angular.min.js');
 		wp_enqueue_script('gfsn-main', plugin_dir_url( __FILE__ ) . '../scripts/main.js');
-		wp_localize_script(
-        'popup-js',
-        'ajax_object',
-        array( 'ajax_url' => admin_url( 'admin-ajax.php' ) )
-    ); 
+		wp_enqueue_script('gfsn-member-service', plugin_dir_url( __FILE__ ) . '../scripts/MemberService.js');
+		wp_enqueue_script('gfsn-member-controller', plugin_dir_url( __FILE__ ) . '../scripts/MemberController.js');
 	}
 
 	private function enqueStyles() {
