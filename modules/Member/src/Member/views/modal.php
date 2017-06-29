@@ -24,6 +24,14 @@
 					    <label for="email">Email address:</label>
 					    <input type="email" class="form-control" id="email" ng-model="vm.subscriber.email" required="required">
 					  </div>
+					  <div class="form-group">
+					    <label for="firstName">First name:</label>
+					    <input type="text" class="form-control" id="firstName" ng-model="vm.subscriber.firstName" required="required">
+					  </div>
+					  <div class="form-group">
+					    <label for="lastName">Last name:</label>
+					    <input type="text" class="form-control" id="lastName" ng-model="vm.subscriber.lastName" required="required">
+					  </div>
 	          <p><a href="#" ng-click="vm.tab = 'login'">Already a Member?</a></p>
 					  <button type="submit" class="btn btn-success">Subscribe</button>
 				  </form>

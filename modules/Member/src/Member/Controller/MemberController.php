@@ -27,6 +27,7 @@ class MemberController {
 		$uniqueToken = uniqid();
 		
 		$user = wp_create_user($_POST['email'], $password, $_POST['email']);
+		wp_update_user(array('ID' => $user, 'first_name' => $_POST['firstName'], 'last_name' => $_POST['lastName']));
 	
 		if ($user) {
 			update_user_meta($user, self::UNIQUE_TOKEN, $uniqueToken);
