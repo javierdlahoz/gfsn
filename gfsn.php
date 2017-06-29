@@ -15,6 +15,7 @@ require __DIR__ . '/config/autoloader.php';
 
 use Member\Initializer\MemberInitializer;
 use Member\Controller\MemberController;
+use Author\Initializer\AuthorInitializer;
 
 if ( ! class_exists( 'Gfsn' ) ) :
 
@@ -22,6 +23,7 @@ class Gfsn {
 
 	function __construct() {
 		$initializer = new MemberInitializer();
+		$authorInitializer = new AuthorInitializer();
 		if (isset($_GET['email_token'])) {
 			add_action('init', array(&$this, 'validateToken'));
 		}
