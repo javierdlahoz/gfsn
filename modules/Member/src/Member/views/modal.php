@@ -1,4 +1,4 @@
-<div id="subscribeModal" class="modal fade" role="dialog">
+<div id="subscribeModal" class="modal fade ontop" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

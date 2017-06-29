@@ -2,3 +2,11 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+.modal.ontop {
+	z-index: 9999999;
+}
+
+.modal-backdrop {
+	display: none;
+}
