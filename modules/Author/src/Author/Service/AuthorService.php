@@ -5,7 +5,7 @@ namespace Author\Service;
 class AuthorService {
 
 	const AUTHOR_IDS = 'author_ids';
-	const AUTHOR_SLUG = 'book_author';
+	const AUTHOR_SLUG = 'author';
 
 	public function getAuthorField() {
 		global $post;
@@ -17,6 +17,17 @@ class AuthorService {
         'order' => 'ASC'
     ));
     include __DIR__ . '/../views/author_field.php';
+	}
+
+	public function saveAuthorsOnProducts($productId) {
+		if ('product' != get_post_type($productId))
+      return $productId;        
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+      return $productId;
+		if (!current_user_can('edit_post', $productId))
+      return $productId;
+    
+    update_post_meta($productId, self::AUTHOR_IDS, $_POST[self::AUTHOR_IDS]);
 	}
 
 }
