@@ -118,7 +118,6 @@ class MemberInitializer {
 	}
 
 	private function enqueStyles() {
-		wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css?family=Roboto|Merriweather|Lato|Ubuntu|Ubuntu+Mono');
 		wp_enqueue_style('gsfn-main-styles', plugin_dir_url( __FILE__ ) . '../styles/main.css');
 	}
 
