@@ -5,7 +5,7 @@ namespace Author\Service;
 class AuthorService {
 
 	const AUTHOR_IDS = 'author_ids';
-	const AUTHOR_SLUG = 'author';
+	const AUTHOR_SLUG = 'book-author';
 
   /**
    * @param  int $postId

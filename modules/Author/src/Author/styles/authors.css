@@ -11,6 +11,11 @@
 	margin: 20px;
 }
 
+.author-avatar.avatar-large {
+	height: 240px;
+	width: 240px;
+}
+
 .author-more-btn {
 	background-color: #ff851d !important;
 	margin: 20px !important;
