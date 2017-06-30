@@ -1,0 +1,21 @@
+.author-chip-container {
+	border: 1px solid #ddd;
+}
+
+.author-avatar {
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 96px;
+	width: 96px;
+	border-radius: 50%;
+	margin: 20px;
+}
+
+.author-more-btn {
+	background-color: #ff851d !important;
+	margin: 20px !important;
+}
+
+.authors-header {
+	margin-bottom: 15px;
+}
