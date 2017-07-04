@@ -1,5 +1,9 @@
 angular.module('gfsn').controller('MemberController', MemberController);
 
+function onCaptchaSuccess() {
+	jQuery('#createUserBtn').prop("disabled", false);
+}
+
 function MemberController($scope, MemberService) {
 	var vm = this;
 	vm.MemberService = MemberService;
