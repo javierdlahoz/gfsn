@@ -20,7 +20,7 @@
       	
       	<div ng-hide="vm.messageToShow">
       		<form ng-submit="vm.createUser()" ng-show="vm.tab == 'subscribe'">
-		        <p>Subscribtion is free, just introduce your email address</p>
+		        <p>Membership is free simply enter your information below:</p>
 	          <div class="form-group">
 					    <label for="email"><i aria-hidden="true" class="fa fa-envelope"></i> Email:</label>
 					    <input type="email" class="form-control" id="email" ng-model="vm.subscriber.email" required="required">

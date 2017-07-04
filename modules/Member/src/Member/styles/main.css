@@ -5,6 +5,9 @@
 .btn-download.btn{
 	margin-top: 20px;
 	margin-bottom: 20px;
+	border-radius: 0px;
+	padding: 14px 20px;
+  font-weight: 700;
 }
 
 .modal.ontop {
