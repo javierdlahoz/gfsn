@@ -6,7 +6,6 @@ global $post;
 $authors = AuthorService::getAuthorsFromPost($post->ID);
 if (count($authors) > 0):
 ?>
-<div class="posted_in authors-header">Authors</div>
 <div class="row">
 <?php foreach ($authors as $author): ?>
 	<div class="col-md-3 col-sm-6 text-center">
