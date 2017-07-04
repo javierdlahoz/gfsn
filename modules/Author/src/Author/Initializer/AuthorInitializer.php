@@ -12,7 +12,7 @@ class AuthorInitializer {
 		$this->authorService = new AuthorService();
 		add_action('admin_init', array(&$this, 'addAuthorToProduct'));
 		add_action('save_post', array(&$this->authorService, 'saveAuthorsOnProducts'));
-		add_action('woocommerce_single_product_summary', array(&$this, 'addAuthorsInfo'), 30);
+		add_action('woocommerce_product_tabs', array(&$this, 'addAuthorsInfo'), 30);
 		add_action('init', array(&$this, 'addStyles'));
 		add_action('init', array(&$this, 'createAuthorPostType'));
 	}
@@ -25,7 +25,16 @@ class AuthorInitializer {
 		add_meta_box('author_metabox', 'Authors', array(&$this->authorService, 'getAuthorField'), 'product', 'side');
 	}
 
-	public function addAuthorsInfo() {
+	public function addAuthorsInfo($tabs) {
+		$tabs['authors_tab'] = array(
+			'title' => __('Authors', 'woocommerce'),
+			'priority' => 15,
+			'callback' => array(&$this, 'authorsTab')
+		);
+		return $tabs;
+	}
+
+	public function authorsTab() {
 		include __DIR__ . '/../views/authors_info.php';
 	}
 

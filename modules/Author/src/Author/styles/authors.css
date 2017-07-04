@@ -18,9 +18,19 @@
 
 .author-more-btn {
 	background-color: #ff851d !important;
-	margin: 20px !important;
+	width: 100%;
 }
 
 .authors-header {
 	margin-bottom: 15px;
+}
+
+.author-website-logo {
+	width: 120px;
+}
+
+.btn-read-more-container {
+	width: 100%;
+	position: relative;
+	padding: 10px;
 }
