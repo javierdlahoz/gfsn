@@ -18,7 +18,7 @@
 	display: none;
 }
 
-.member-btn {
+.member-btn{
   width: 100%;
   height: 58px;
   background: #161d56;
@@ -30,7 +30,12 @@
   font-size: 18px;
 }
 
+.member-btn.btn {
+	border-radius: 0px;
+	margin-top: 10px;
+}
+
 .member-btn:hover {
 	background: #161d56;
-	color: #fff !important;
-} 
+	color: inherit !important;
+}

@@ -4,7 +4,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Download Files</h4>
+        <h4 class="modal-title" ng-show="vm.tab == 'subscribe'">Instant Access Become a Member</h4>
+        <h4 class="modal-title" ng-show="vm.tab == 'login'">Log in for Instant Access</h4>
       </div>
       <div class="modal-body">
 
@@ -34,7 +35,7 @@
 					    <input type="text" class="form-control" id="lastName" ng-model="vm.subscriber.lastName" required="required">
 					  </div>
 					  <div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div>
-	          <p><a href="#" ng-click="vm.tab = 'login'">Already a Member?</a></p>
+	          <button type="button" class="member-btn btn btn-default" ng-click="vm.tab = 'login'">Already a Member?</button>
 					  <button type="submit" class="member-btn btn" id="createUserBtn" disabled="disabled">Subscribe</button>
 				  </form>
 
@@ -48,8 +49,8 @@
 					    <input type="password" class="form-control" ng-model="vm.user.password" minLength="5" required="required" name="password">
 					  </div>
 					  <div class="alert alert-danger" ng-show="vm.wrongCredentials">Wrong Credentials</div>
-					  <p><a href="#" ng-click="vm.tab = 'subscribe'">Subscribe as a new member</a></p>
-					  <p><a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a></p>
+					  <a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a>
+					  <button type="button" class="member-btn btn btn-default" ng-click="vm.tab = 'subscribe'">Subscribe as a new member</button>
 					  <button type="submit" class="btn member-btn">Login</button>
 				  </form>
       	</div>
