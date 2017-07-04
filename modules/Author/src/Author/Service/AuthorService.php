@@ -20,6 +20,21 @@ class AuthorService {
     return $authors;
   }
 
+  public static function getProductsByAuthor($authorId) {
+    $args = array(
+      'post_type' => 'product',
+      'meta_query' => array(
+        array(
+          'key' => self::AUTHOR_IDS,
+          'value' => '"'.$authorId.'"',
+          'compare' => 'LIKE',
+        )
+      )
+    );
+    $products = get_posts($args);
+    return $products;
+  }
+
 	public function getAuthorField() {
 		global $post;
     $authorIds = get_post_meta($post->ID, self::AUTHOR_IDS, true);
