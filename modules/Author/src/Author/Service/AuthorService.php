@@ -58,4 +58,13 @@ class AuthorService {
     update_post_meta($productId, self::AUTHOR_IDS, $_POST[self::AUTHOR_IDS]);
 	}
 
+  public static function getTeamBgHeader($teamId) {
+    $options = json_decode(get_post_meta($teamId, self::AUTHOR_IDS, true));
+    if(isset($options->{'header-background'})) {
+      return wp_get_attachment_url($options->{'header-background'});
+    } else {
+      return null;
+    }
+  }
+
 }
