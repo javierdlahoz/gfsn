@@ -18,7 +18,7 @@ if (count($authors) > 0):
 						<h3 class="woocommerce-loop-product__title"><?php echo $author->post_title; ?></h3>
 					</a>
 					<a rel="nofollow" href="<?php echo get_permalink($author->ID); ?>" 
-						class="button product_type_simple ajax_add_to_cart">Read more</a>
+						class="button product_type_simple ajax_add_to_cart">Show Bio</a>
 				</li>
 			<?php endforeach; ?>
 		</ul>
