@@ -1,3 +1,8 @@
+.kode-multi-combobox-wrapper select {
+	width: 100%;
+	height: 320px !important;
+}
+
 .product-title {
 	color: #fff;
 }

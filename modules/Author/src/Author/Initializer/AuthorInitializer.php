@@ -10,11 +10,11 @@ class AuthorInitializer {
 
 	function __construct() {
 		$this->authorService = new AuthorService();
-		add_action('admin_init', array(&$this, 'addAuthorToProduct'));
-		add_action('save_post', array(&$this->authorService, 'saveAuthorsOnProducts'));
+		//add_action('admin_init', array(&$this, 'addAuthorToProduct'));
+		//add_action('save_post', array(&$this->authorService, 'saveAuthorsOnProducts'));
 		add_action('woocommerce_product_tabs', array(&$this, 'addAuthorsInfo'), 30);
 		add_action('init', array(&$this, 'addStyles'));
-		add_action('init', array(&$this, 'createAuthorPostType'));
+		//add_action('init', array(&$this, 'createAuthorPostType'));
 	}
 
 	public function addStyles() {

@@ -4,8 +4,8 @@ namespace Author\Service;
 
 class AuthorService {
 
-	const AUTHOR_IDS = 'author_ids';
-	const AUTHOR_SLUG = 'book-author';
+	const AUTHOR_IDS = 'post-option';
+	const AUTHOR_SLUG = 'team';
 
   /**
    * @param  int $postId
@@ -13,8 +13,8 @@ class AuthorService {
    */
   public static function getAuthorsFromPost($postId) {
     $authors = array();
-    $ids = get_post_meta($postId, self::AUTHOR_IDS, true);
-    foreach ($ids as $id) {
+    $options = json_decode(get_post_meta($postId, self::AUTHOR_IDS, true));
+    foreach ($options->{'select-author'} as $id) {
       $authors[] = get_post($id);
     }
     return $authors;

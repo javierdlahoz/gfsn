@@ -6,8 +6,8 @@
 .author-avatar {
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 96px;
-	width: 96px;
+	height: 130px;
+	width: 130px;
 	border-radius: 50%;
 	margin: 20px;
 }
@@ -34,4 +34,8 @@
 	width: 100%;
 	position: relative;
 	padding: 10px;
+}
+
+.woocommerce div.product .woocommerce-tabs .panel {
+	border: 0px;
 }
