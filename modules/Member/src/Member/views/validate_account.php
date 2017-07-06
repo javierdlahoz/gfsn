@@ -1,16 +1,22 @@
 <?php 
 
+if(wp_get_current_user()->ID === 0) {
+	echo '<script type="text/javascript">
+		window.location.href = "/";
+	</script>';
+}
+
 use Member\Controller\MemberController;
 
 $user = wp_get_current_user();
 $cUser = get_userdata($user->ID);
 if($_POST['first_name']) {
-	MemberController::updateCurrentUser();
-	$redirectUrl = get_user_meta($user->ID, MemberController::REDIRECT_URL, true);
-	echo '<script type="text/javascript">
-		console.log("ome");
-		window.location.href = "'.$redirectUrl.'";
-	</script>';
+	if(MemberController::updateCurrentUser()) {
+		$redirectUrl = get_user_meta($user->ID, MemberController::REDIRECT_URL, true);
+		// echo '<script type="text/javascript">
+		// window.location.href = "'.$redirectUrl.'";
+		// </script>';
+	}
 }
 ?>
 <div class="row">

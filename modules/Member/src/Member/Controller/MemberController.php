@@ -21,7 +21,10 @@ class MemberController {
 		if(!empty($_POST['password'])) {
 			wp_set_password($_POST['password'], $user->ID);
 			wp_set_current_user($user->ID);
+			wp_signon(array('user_login' => $user->user_login, 'user_password' => $_POST['password'], 'remember' => true), false);
+			wp_set_auth_cookie($user->ID);
 		}
+		return true;
 	}
 
 	public function nounce() {
