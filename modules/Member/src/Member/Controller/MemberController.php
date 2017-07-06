@@ -9,8 +9,20 @@ class MemberController {
 	const UNIQUE_TOKEN = 'unique_token';
 	const VALIDATED = 'email_validated';
 	const INITIAL_PASSWORD = 'initial_password';
+	const REDIRECT_URL = 'gfsn-redirect-url';
+
 
 	function __construct() {}
+
+	public static function updateCurrentUser() {
+		$user = wp_get_current_user();
+		wp_update_user(array('ID' => $user->ID, 'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name']));
+		
+		if(!empty($_POST['password'])) {
+			wp_set_password($_POST['password'], $user->ID);
+			wp_set_current_user($user->ID);
+		}
+	}
 
 	public function nounce() {
 		return array('nounce' => wp_create_nonce('wp_rest'));
@@ -33,6 +45,7 @@ class MemberController {
 			update_user_meta($user, self::UNIQUE_TOKEN, $uniqueToken);
 			update_user_meta($user, self::VALIDATED, false);
 			update_user_meta($user, self::INITIAL_PASSWORD, $password);
+			update_user_meta($user, self::REDIRECT_URL, $_POST['redirectUrl']);
 
 			$this->sendConfirmEmail($_POST['email'], $uniqueToken, $password);
 

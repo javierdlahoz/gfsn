@@ -123,6 +123,7 @@ class MemberInitializer {
 				'post_name'		=>	'validate-account',
 				'post_title'		=>	'Validate Account',
 				'post_status'		=>	'publish',
+				'post_content'	=> '[gfsn-validate-account]',
 				'post_type'		=>	'page'
 			);
 			wp_insert_post($page);
@@ -130,7 +131,9 @@ class MemberInitializer {
 	}
 
 	public function addValidateAccountPage() {
+		ob_start();
 		include __DIR__ . '/../views/validate_account.php';
+		return ob_get_clean();
 	}
 
 	private function setAjaxNonce() {
