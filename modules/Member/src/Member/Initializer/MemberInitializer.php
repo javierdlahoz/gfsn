@@ -6,11 +6,17 @@ use Member\Controller\MemberController;
 
 class MemberInitializer {
 
+	const VALIDATE_SLUG = 'validate-account';
+
 	private $memberController;
 	
 	function __construct() {
 		$this->memberController = new MemberController();
 		add_action('wp_loaded', array(&$this, 'initializePlugin'));
+		add_action('init', array(&$this, 'createValidateAccountPage'));
+
+		add_shortcode('gfsn-validate-account', array(&$this, 'addValidateAccountPage')); 
+
 		add_filter('wp_mail_content_type', array(&$this, 'setEmailsAsHtml'));
 		add_action('wp_print_scripts', array(&$this, 'removePasswordStrenght'), 100);
 		add_filter('user_contactmethods', array(&$this, 'isUserValidatedHeader'), 10, 1);
@@ -99,6 +105,32 @@ class MemberInitializer {
 				break;
 		}
 		return $val;
+	}
+
+	public function createValidateAccountPage() {
+		$args = array(
+		  'name'        => self::VALIDATE_SLUG,
+		  'post_type'   => 'page',
+		  'post_status' => 'publish',
+		  'numberposts' => 1
+		);
+		$posts = get_posts($args);
+		if (!$posts) {
+			$page = array(
+				'comment_status'	=>	'closed',
+				'ping_status'		=>	'closed',
+				'post_author'		=>	1,
+				'post_name'		=>	'validate-account',
+				'post_title'		=>	'Validate Account',
+				'post_status'		=>	'publish',
+				'post_type'		=>	'page'
+			);
+			wp_insert_post($page);
+		}
+	}
+
+	public function addValidateAccountPage() {
+		include __DIR__ . '/../views/validate_account.php';
 	}
 
 	private function setAjaxNonce() {

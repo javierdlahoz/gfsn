@@ -4,54 +4,52 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" ng-show="vm.tab == 'subscribe'">Instant Access Become a Member</h4>
-        <h4 class="modal-title" ng-show="vm.tab == 'login'">Log in for Instant Access</h4>
+        <h5 class="modal-title text-center">{{vm.modalTitle}}</h5>
       </div>
       <div class="modal-body">
 
 	      <div ng-show="vm.messageToShow">
 	      	<div class="alert alert-{{vm.warningMessageType}}" ng-show="vm.warningMessage">{{vm.warningMessage}}</div>
+	      	<button type="button" class="member-btn btn btn-default" ng-show="vm.alreadyAMember"
+	      		ng-click="vm.messageToShow = false; vm.tab = 'login'; vm.modalTitle = 'Log in for Instant Access'">Already a Member?</button>
 
 	      	<div ng-show="vm.retryMessage">
-	      		<p>Your account hasn't been validated yet, please check your email and validate your account</p>
-	      		<button class="btn btn-success" ng-click="vm.retryDownloadFiles()">Retry</button>
-	      		<button class="btn btn-primary" ng-click="vm.resendEmail()">Resend Email</button>
+	      		<p>
+	      			<big>
+	      				<b>One Last Step</b>, check the activation email sent to your mailbox by the system to activate your free membership
+	      			</big>
+	      		</p>
+	      		<small>Note: Please check your "junk" folder in case you can't find our activation email.</small>
+	      		<!--button class="btn btn-success" ng-click="vm.retryDownloadFiles()">Retry</button>
+	      		<button class="btn btn-primary" ng-click="vm.resendEmail()">Resend Email</button-->
 	      	</div>
 	      </div>
       	
       	<div ng-hide="vm.messageToShow">
       		<form ng-submit="vm.createUser()" ng-show="vm.tab == 'subscribe'">
-		        <p>Membership is free simply enter your information below:</p>
 	          <div class="form-group">
-					    <label for="email"><i aria-hidden="true" class="fa fa-envelope"></i> Email:</label>
-					    <input type="email" class="form-control" id="email" ng-model="vm.subscriber.email" required="required">
+					    <input type="email" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" required="required">
+					    <input type="hidden" ng-model="vm.notarobot">
 					  </div>
-					  <div class="form-group">
-					    <label for="firstName"><i aria-hidden="true" class="fa fa-user"></i> First name:</label>
-					    <input type="text" class="form-control" id="firstName" ng-model="vm.subscriber.firstName" required="required">
-					  </div>
-					  <div class="form-group">
-					    <label for="lastName"><i aria-hidden="true" class="fa fa-user"></i> Last name:</label>
-					    <input type="text" class="form-control" id="lastName" ng-model="vm.subscriber.lastName" required="required">
-					  </div>
-					  <div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div>
-	          <button type="button" class="member-btn btn btn-default" ng-click="vm.tab = 'login'">Already a Member?</button>
-					  <button type="submit" class="member-btn btn" id="createUserBtn" disabled="disabled">Subscribe</button>
+					  <!--div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div-->
+	          <button type="submit" class="member-btn btn" id="createUserBtn">Subscribe</button>
+	          <button type="button" class="member-btn btn btn-default" 
+	          	ng-click="vm.tab = 'login'; vm.modalTitle = 'Log in for Instant Access'">Already a Member?</button>
 				  </form>
 
 				  <form ng-show="vm.tab == 'login'" ng-submit="vm.login()">
 		        <div class="form-group">
-					    <label for="email"><i aria-hidden="true" class="fa fa-user"></i> Email:</label>
-					    <input type="email" class="form-control" ng-model="vm.user.email" required="required" name="email">
+					    <input type="email" placeholder="Your Email" class="form-control" ng-model="vm.user.email" required="required" name="email">
 					  </div>
 	          <div class="form-group">
-					    <label for="password"><i aria-hidden="true" class="fa fa-lock"></i> Password:</label>
-					    <input type="password" class="form-control" ng-model="vm.user.password" minLength="5" required="required" name="password">
+					    <input type="password" placeholder="Your Password" class="form-control" ng-model="vm.user.password"
+					    	minLength="5" required="required" name="password">
 					  </div>
 					  <div class="alert alert-danger" ng-show="vm.wrongCredentials">Wrong Credentials</div>
 					  <a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a>
-					  <button type="button" class="member-btn btn btn-default" ng-click="vm.tab = 'subscribe'">Subscribe as a new member</button>
 					  <button type="submit" class="btn member-btn">Login</button>
+					  <button type="button" class="member-btn btn btn-default" 
+					  	ng-click="vm.tab = 'subscribe'; vm.modalTitle = vm.defaultModalTitle">Subscribe as a new member</button>
 				  </form>
       	</div>
 

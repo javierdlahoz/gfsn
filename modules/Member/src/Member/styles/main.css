@@ -42,5 +42,10 @@
 
 .member-btn:hover {
 	background: #161d56;
-	color: inherit !important;
+	color: #fff !important;
+}
+
+.member-btn:focus {
+	background: #161d56;
+	color: #fff !important;
 }

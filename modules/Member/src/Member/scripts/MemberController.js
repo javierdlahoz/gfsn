@@ -6,6 +6,7 @@ function onCaptchaSuccess() {
 
 function MemberController($scope, MemberService) {
 	var vm = this;
+	vm.defaultModalTitle = 'Get Instant Access Become A Member While Is Free';
 	vm.MemberService = MemberService;
 	vm.validated = false;
 	vm.localProductId = null;
@@ -18,6 +19,9 @@ function MemberController($scope, MemberService) {
 	vm.warningMessage = null;
 	vm.wrongCredentials = false;
 	vm.warningMessageType = 'warning';
+	vm.notarobot = true;
+	vm.alreadyAMember = false;
+	vm.modalTitle = vm.defaultModalTitle;
 	
 	vm.initialize = function() {
 		if (vm.getParameterByName('action') === 'download') {
@@ -42,15 +46,24 @@ function MemberController($scope, MemberService) {
 	}
 
 	vm.createUser = function() {
+		if(vm.notarobot !== true) {
+			return false;
+		}
 		vm.initializeForms();
 		vm.messageToShow = true;
 		vm.warningMessage = 'Please wait';
 
 		vm.MemberService.createUser(vm.subscriber, function(response) {
-			vm.warningMessage = null;
-			vm.userLoggedIn = true;
-			vm.validated = response.validated;
-			vm.handleDownloads();
+			if (response.success) {
+				vm.warningMessage = null;
+				vm.modalTitle = 'Thank you!';
+				vm.validated = response.validated;
+				vm.handleDownloads();
+			} else {
+				vm.warningMessage = 'This email is already in use. Already a member?';
+				vm.warningMessageType = 'danger';
+				vm.alreadyAMember = true;
+			}
 		});
 	}
 
@@ -127,11 +140,13 @@ function MemberController($scope, MemberService) {
 	}
 
 	vm.initializeForms = function() {
+		vm.modalTitle = vm.defaultModalTitle;
 		vm.wrongCredentials = false;
 		vm.retryMessage = false;
 		vm.warningMessage = null;
 		vm.messageToShow = false;
 		vm.warningMessageType = 'warning';
+		vm.alreadyAMember = false;
 	}
 
 	vm.toogleModal = function(show = true) {

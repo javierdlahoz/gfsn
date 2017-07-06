@@ -20,14 +20,14 @@ class MemberController {
 		$user = get_user_by('email', $_POST['email']);
 		if ($user) {
 			$validated = $this->isUserValidated($user->ID);
-			return array('message' => 'Member already registered', 'validated' => $validated);
+			wp_send_json_error(array('message' => 'Member already registered', 'validated' => $validated));
 		}
 
 		$password = wp_generate_password(6);
 		$uniqueToken = uniqid();
 		
 		$user = wp_create_user($_POST['email'], $password, $_POST['email']);
-		wp_update_user(array('ID' => $user, 'first_name' => $_POST['firstName'], 'last_name' => $_POST['lastName']));
+		// wp_update_user(array('ID' => $user, 'first_name' => $_POST['firstName'], 'last_name' => $_POST['lastName']));
 	
 		if ($user) {
 			update_user_meta($user, self::UNIQUE_TOKEN, $uniqueToken);
@@ -36,8 +36,8 @@ class MemberController {
 
 			$this->sendConfirmEmail($_POST['email'], $uniqueToken, $password);
 
-			wp_signon(array('user_login' => $_POST['email'], 'user_password' => $password, 'remember' => true), false);
-			return array('message' => 'Member successfully subscribed', 'validated' => false);
+			// wp_signon(array('user_login' => $_POST['email'], 'user_password' => $password, 'remember' => true), false);
+			return array('message' => 'Member successfully subscribed', 'validated' => false, 'success' => true);
 		}
 		else {
 			wp_send_json_error($user);

@@ -38,7 +38,7 @@ class Gfsn {
 			$password = get_user_meta($user->ID, MemberController::INITIAL_PASSWORD, true);
 			$auth = wp_signon(array('user_login' => $user->user_login, 'user_password' => $password, 'remember' => true), false);
 			if (!is_wp_error($auth)) {
-				wp_redirect(home_url('/my-account/edit-account/'));
+				wp_redirect(home_url('/validate-account/'));
 				exit();
 			}
 		}
