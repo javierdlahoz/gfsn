@@ -15,16 +15,18 @@ class MemberController {
 	function __construct() {}
 
 	public static function updateCurrentUser() {
+		require_once('../../../wp-load.php');
 		$user = wp_get_current_user();
 		wp_update_user(array('ID' => $user->ID, 'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name']));
 		
 		if(!empty($_POST['password'])) {
 			wp_set_password($_POST['password'], $user->ID);
-			wp_set_current_user($user->ID);
-			wp_signon(array('user_login' => $user->user_login, 'user_password' => $_POST['password'], 'remember' => true), false);
 			wp_set_auth_cookie($user->ID);
+			wp_set_current_user($user->ID);
+			do_action('wp_login', $user->user_login, $user);	
 		}
-		return true;
+		$url = get_user_meta($user->ID, self::REDIRECT_URL, true);
+		wp_redirect($url);
 	}
 
 	public function nounce() {

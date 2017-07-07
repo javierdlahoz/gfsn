@@ -17,6 +17,11 @@ use Member\Initializer\MemberInitializer;
 use Member\Controller\MemberController;
 use Author\Initializer\AuthorInitializer;
 
+
+if (!empty($_POST['validate_account'])) {
+	MemberController::updateCurrentUser();
+}
+
 if ( ! class_exists( 'Gfsn' ) ) :
 
 class Gfsn {

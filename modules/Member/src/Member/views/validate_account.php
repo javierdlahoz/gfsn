@@ -1,28 +1,16 @@
 <?php 
-
-if(wp_get_current_user()->ID === 0) {
+$user = wp_get_current_user();
+if($user->ID === 0) {
 	echo '<script type="text/javascript">
 		window.location.href = "/";
 	</script>';
-}
-
-use Member\Controller\MemberController;
-
-$user = wp_get_current_user();
-$cUser = get_userdata($user->ID);
-if($_POST['first_name']) {
-	if(MemberController::updateCurrentUser()) {
-		$redirectUrl = get_user_meta($user->ID, MemberController::REDIRECT_URL, true);
-		// echo '<script type="text/javascript">
-		// window.location.href = "'.$redirectUrl.'";
-		// </script>';
-	}
 }
 ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="alert alert-success">Account successfully validated</div>
-		<form action="" method="POST">
+		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST">
+			<input type="hidden" name="validate_account" value="true">
 			<div class="form-group">
 				<input type="text" name="first_name" class="form-control" placeholder="Your First Name" 
 					required="required" value="<?php echo $user->first_name; ?>">
