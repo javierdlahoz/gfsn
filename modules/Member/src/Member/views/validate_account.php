@@ -16,7 +16,7 @@ if($user->ID === 0) {
 					required="required" value="<?php echo $user->first_name; ?>">
 			</div>
 			<div class="form-group">
-				<input type="text" name="last_name" class="form-control" placeholder="Your Lasst Name" 
+				<input type="text" name="last_name" class="form-control" placeholder="Your Last Name" 
 					required="required" value="<?php echo $user->last_name; ?>">
 			</div>
 			<div class="form-group">
