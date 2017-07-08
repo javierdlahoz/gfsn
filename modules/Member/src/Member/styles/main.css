@@ -49,3 +49,11 @@
 	background: #161d56;
 	color: #fff !important;
 }
+
+.validate-account-form {
+	margin-bottom: 60px;
+}
+
+.validate-account-form button{
+	padding: 10px;
+}

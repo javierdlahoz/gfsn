@@ -16,6 +16,7 @@ require __DIR__ . '/config/autoloader.php';
 use Member\Initializer\MemberInitializer;
 use Member\Controller\MemberController;
 use Author\Initializer\AuthorInitializer;
+use Product\Initializer\ProductInitializer;
 
 
 if (!empty($_POST['validate_account'])) {
@@ -29,6 +30,7 @@ class Gfsn {
 	function __construct() {
 		$initializer = new MemberInitializer();
 		$authorInitializer = new AuthorInitializer();
+		$productInitializer = new ProductInitializer();
 		if (isset($_GET['email_token'])) {
 			add_action('init', array(&$this, 'validateToken'));
 		}

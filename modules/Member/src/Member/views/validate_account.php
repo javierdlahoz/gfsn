@@ -9,7 +9,7 @@ if($user->ID === 0) {
 <div class="row">
 	<div class="col-md-12">
 		<div class="alert alert-success">Account successfully validated</div>
-		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST">
+		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form">
 			<input type="hidden" name="validate_account" value="true">
 			<div class="form-group">
 				<input type="text" name="first_name" class="form-control" placeholder="Your First Name" 
