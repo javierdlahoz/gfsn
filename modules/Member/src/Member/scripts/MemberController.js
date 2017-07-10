@@ -6,7 +6,7 @@ function onCaptchaSuccess() {
 
 function MemberController($scope, MemberService) {
 	var vm = this;
-	vm.defaultModalTitle = 'Get Instant Access Become A Member While Is Free';
+	vm.defaultModalTitle = "Get Instant Access Become A Member While It's Free";
 	vm.MemberService = MemberService;
 	vm.validated = false;
 	vm.localProductId = null;
