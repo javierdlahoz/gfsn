@@ -121,7 +121,7 @@ class MemberInitializer {
 				'ping_status'		=>	'closed',
 				'post_author'		=>	1,
 				'post_name'		=>	'validate-account',
-				'post_title'		=>	'Validate Account',
+				'post_title'		=>	'Complete Your Registration',
 				'post_status'		=>	'publish',
 				'post_content'	=> '[gfsn-validate-account]',
 				'post_type'		=>	'page'

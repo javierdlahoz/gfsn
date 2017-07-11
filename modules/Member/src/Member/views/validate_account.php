@@ -8,7 +8,7 @@ if($user->ID === 0) {
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-success">Account successfully validated</div>
+		<div class="alert alert-success">Please complete your first name and last name in the form below</div>
 		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form">
 			<input type="hidden" name="validate_account" value="true">
 			<div class="form-group">
@@ -23,7 +23,7 @@ if($user->ID === 0) {
 				<small>Leave it blank if you don't want to change your password</small>
 				<input type="password" name="password" class="form-control" placeholder="Your Password" minLength="5">
 			</div>
-			<button type="submit" class="btn btn-success btn-block">Save</button>
+			<button type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>
 		</form>
 	</div>
 </div>
