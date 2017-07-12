@@ -1,11 +1,10 @@
-var dcq = dcq || [];
-var dcs = dcs || {}; 
-dcs.account = '2017875';
-
-(function() {
-  var dc = document.createElement('script');
-  dc.type = 'text/javascript'; dc.async = true; 
-  dc.src = '//tag.getdrip.com/2017875.js';
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(dc, s);
-})();
+function subscribeUser(user){
+	var campaignId = '14740912';
+	var response = _dcq.push(["identify", {
+		email: user.email,
+		first_name: user.first_name,
+		last_name: user.last_name,
+		tags: ["Customer"]
+	}]);
+	_dcq.push(["subscribe", { campaign_id: campaignId, fields: { email: user.email }}]);
+}

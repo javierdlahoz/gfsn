@@ -26,7 +26,7 @@ class MemberController {
 			do_action('wp_login', $user->user_login, $user);	
 		}
 		$url = get_user_meta($user->ID, self::REDIRECT_URL, true);
-		wp_redirect($url);
+		wp_redirect($url . '?subscribe=yes');
 	}
 
 	public function nounce() {
