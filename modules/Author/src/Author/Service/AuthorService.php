@@ -8,6 +8,34 @@ class AuthorService {
 	const AUTHOR_SLUG = 'team';
 
   /**
+   * @return array
+   */
+  public static function getAuthors() {
+    $args = array(
+      'post_type' => 'team',
+      'posts_per_page' => -1,
+      'tax_query' => array(
+          array(
+          'taxonomy' => 'team_category',
+          'field' => 'slug',
+          'terms' => 'authors',
+          )
+      )
+    );
+    $authors = get_posts($args);
+    return $authors;
+  }
+
+  /**
+   *
+   * @param int $authorId
+   * @return int
+   */
+  public static function getAmountOfProductsByAuthor($authorId) {
+    return count(self::getProductsByAuthor($authorId));
+  }
+
+  /**
    * @param  int $postId
    * @return array
    */
