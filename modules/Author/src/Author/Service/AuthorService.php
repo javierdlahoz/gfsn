@@ -14,6 +14,8 @@ class AuthorService {
     $args = array(
       'post_type' => 'team',
       'posts_per_page' => -1,
+      'orderby' => 'title',
+	    'order' => 'ASC',
       'tax_query' => array(
           array(
           'taxonomy' => 'team_category',

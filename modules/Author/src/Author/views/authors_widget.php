@@ -15,7 +15,7 @@ $authors = AuthorService::getAuthors();
 			</div>
 			<div class="text-column">
 				<strong class="title"><?php echo $author->post_title; ?></strong>
-				<span><?php echo $books; ?> Books</span>
+				<span><?php echo $books; ?> Resources</span>
 			</div>
 		</li>
 		<?php endif; ?>
