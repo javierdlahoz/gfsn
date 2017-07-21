@@ -79,6 +79,21 @@ function MemberController($scope, MemberService) {
 		});
 	}
 
+	vm.loginAndRedirect = function() {
+		vm.initializeSubscription();
+		vm.messageToShow = true;
+		vm.warningMessage = 'Please Wait';
+		vm.MemberService.login(vm.user, function(response) {
+			if (response.success) {
+				vm.warningMessage = 'Redirecting...'
+				vm.validated = response.validated;
+				window.location.href = '/my-account/edit-account';
+			} else {
+				vm.wrongCredentials = true;
+			}
+		});
+	}
+
 	vm.isLoggedIn = function(restartForms = true) {
 		if (restartForms) {
 			vm.initializeForms();	
@@ -141,6 +156,15 @@ function MemberController($scope, MemberService) {
 
 	vm.initializeForms = function() {
 		vm.modalTitle = vm.defaultModalTitle;
+		vm.wrongCredentials = false;
+		vm.retryMessage = false;
+		vm.warningMessage = null;
+		vm.messageToShow = false;
+		vm.warningMessageType = 'warning';
+		vm.alreadyAMember = false;
+	}
+
+	vm.initializeSubscription = function() {
 		vm.wrongCredentials = false;
 		vm.retryMessage = false;
 		vm.warningMessage = null;
