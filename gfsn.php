@@ -17,6 +17,7 @@ use Member\Initializer\MemberInitializer;
 use Member\Controller\MemberController;
 use Author\Initializer\AuthorInitializer;
 use Product\Initializer\ProductInitializer;
+use Slider\Initializer\SliderInitializer;
 
 
 if (!empty($_POST['validate_account'])) {
@@ -31,6 +32,7 @@ class Gfsn {
 		$initializer = new MemberInitializer();
 		$authorInitializer = new AuthorInitializer();
 		$productInitializer = new ProductInitializer();
+		$sliderInitializer = new SliderInitializer();
 		if (isset($_GET['email_token'])) {
 			add_action('init', array(&$this, 'validateToken'));
 		}

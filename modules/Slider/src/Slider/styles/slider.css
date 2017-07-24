@@ -1,0 +1,46 @@
+#gfsnCarousel {
+	height: 400px;
+}
+
+.gfsn-carousel-img {
+	height: 400px;
+	width: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#gfsnCarousel .carousel-control {
+	display: flex;
+  align-items: center;
+	justify-content: center;
+	width: 80px;
+}
+
+.carousel-control-wrapper {
+	width: 48px;
+  height: 48px;
+  background-color: #fff;
+  opacity: 1;
+  border-radius: 50%;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-control.left {
+	background-image: none !important;
+}
+
+.carousel-control.right {
+	background-image: none !important;
+}
+
+.gfsn-carousel-content {
+	height: 400px;
+	display: flex;
+  align-items: center;
+	justify-content: center;
+	padding-left: 120px; 
+}
