@@ -11,7 +11,7 @@
 						<div class="col-md-6 gfsn-carousel-content">
 							<div class="container">
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-12 text-center">
 										<?php the_content(); ?>
 									</div>
 								</div>

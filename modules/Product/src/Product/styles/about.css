@@ -14,6 +14,14 @@
 	margin-top: -3px;
 }
 
+.gfsn-about-section a {
+	color: inherit;
+}
+
+.gfsn-about-section a:hover, .gfsn-about-section a:focus {
+	color: inherit;
+}
+
 .about-section-icon {
 	width: 64px;
 	height: 64px;

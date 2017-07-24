@@ -1,5 +1,6 @@
 #gfsnCarousel {
 	height: 400px;
+	margin-bottom: -3px;
 }
 
 .gfsn-carousel-img {
@@ -42,5 +43,5 @@
 	display: flex;
   align-items: center;
 	justify-content: center;
-	margin-left: 90px;
+	margin: 0 50px;
 }
