@@ -17,7 +17,7 @@ class SliderService {
 			'tag' => $tag,
 			'post_type' => self::SLIDER_TYPE
 		);
-		$sliders = get_posts($args);
+		$sliders = new \WP_Query($args);
 		return $sliders;
 	}
 

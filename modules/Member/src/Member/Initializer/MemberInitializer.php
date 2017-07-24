@@ -17,6 +17,7 @@ class MemberInitializer {
 
 		add_shortcode('gfsn-validate-account', array(&$this, 'addValidateAccountPage'));
 		add_shortcode('gfsn-subscribe-member', array(&$this, 'addSubscribeMember')); 
+		add_shortcode('gfsn-join-button', array(&$this, 'joinButton')); 
 
 		add_filter('wp_mail_content_type', array(&$this, 'setEmailsAsHtml'));
 		add_action('wp_print_scripts', array(&$this, 'removePasswordStrenght'), 100);
@@ -134,6 +135,12 @@ class MemberInitializer {
 	public function addValidateAccountPage() {
 		ob_start();
 		include __DIR__ . '/../views/validate_account.php';
+		return ob_get_clean();
+	}
+
+	public function joinButton() {
+		ob_start();
+		include __DIR__ . '/../views/join_button.php';
 		return ob_get_clean();
 	}
 

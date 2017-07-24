@@ -1,17 +1,18 @@
+<?php if ( $sliders->have_posts() ) : ?>
 <div id="gfsnCarousel" class="carousel slide" data-ride="carousel">
   
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
-		<?php foreach($sliders as $slide): ?>
+		<?php while ($sliders->have_posts()) : $sliders->the_post(); ?>
 		<div class="item active">
-			<div class="gfsn-carousel-img" style="background-image: url('<?php echo wp_get_attachment_url(get_post_thumbnail_id($slide->ID)); ?>')">
+			<div class="gfsn-carousel-img" style="background-image: url('<?php echo wp_get_attachment_url(get_post_thumbnail_id()); ?>')">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-6 gfsn-carousel-content">
 							<div class="container">
 								<div class="row">
-									<div class="col-md-12 text-center">
-										<h4>Test 4 echo!</h4>
+									<div class="col-md-12">
+										<?php the_content(); ?>
 									</div>
 								</div>
 							</div>
@@ -20,7 +21,7 @@
 				</div>
 			</div>
 		</div>
-		<?php endforeach; ?>
+		<?php endwhile; ?>
   </div>
 
   <!-- Left and right controls -->
@@ -37,3 +38,4 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<?php endif; 

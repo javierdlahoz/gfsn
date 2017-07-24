@@ -11,10 +11,7 @@
 
 .gfsn-about-section p {
 	color: inherit;
-}
-
-.about-section-content {
-	padding-right: 95px !important;
+	margin-top: -3px;
 }
 
 .about-section-icon {
