@@ -10,7 +10,8 @@ if (count($authors) > 0):
 	<div class="woocommerce-content">
 		<ul class="products">
 			<?php foreach ($authors as $author): ?>
-				<li class="post-53 product type-product status-publish has-post-thumbnail product_cat-free-pdf first instock downloadable shipping-taxable product-type-simple">
+				<li class="post-53 product type-product status-publish has-post-thumbnail product_cat-free-pdf 
+					first instock downloadable shipping-taxable product-type-simple author-item">
 					<a href="<?php echo get_permalink($author->ID); ?>" class="woocommerce-LoopProduct-link">
 						<center>
 							<div class="author-avatar" style="background-image: url(<?php echo get_the_post_thumbnail_url($author->ID) ?>)"></div>
