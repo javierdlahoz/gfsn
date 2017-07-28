@@ -3,8 +3,9 @@
   
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
+		<?php $counter = 1; ?>
 		<?php while ($sliders->have_posts()) : $sliders->the_post(); ?>
-		<div class="item active">
+		<div class="item <?php if($counter === 1) echo 'active'; ?>">
 			<div class="gfsn-carousel-img" style="background-image: url('<?php echo wp_get_attachment_url(get_post_thumbnail_id()); ?>')">
 				<div class="container-fluid">
 					<div class="row">
@@ -21,6 +22,7 @@
 				</div>
 			</div>
 		</div>
+		<?php $counter++; ?>
 		<?php endwhile; ?>
   </div>
 
