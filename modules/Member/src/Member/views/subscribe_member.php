@@ -1,5 +1,5 @@
 <div id="subscribeMemberModal" class="modal fade" role="dialog" ng-app='gfsn' ng-controller="MemberController as vm" ng-cloak>
-	<div class="modal-dialog">
+	<div class="modal-dialog" ng-init="vm.modalTitle = 'Become a Member Today. It\'s Free!'">
 		<div class="modal-content">
 			<div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -28,7 +28,7 @@
 							<input type="hidden" ng-model="vm.notarobot">
 						</div>
 						<!--div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div-->
-						<button type="submit" class="member-btn btn" id="createUserBtn">Subscribe</button>
+						<button type="submit" class="member-btn btn" id="createUserBtn">Subscribe for Free</button>
 						<button type="button" class="member-btn btn btn-default" 
 							ng-click="vm.tab = 'login'; vm.modalTitle = 'Log in for Instant Access'">Already a Member?</button>
 					</form>
@@ -45,7 +45,7 @@
 						<a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a>
 						<button type="submit" class="btn member-btn">Login</button>
 						<button type="button" class="member-btn btn btn-default" 
-							ng-click="vm.tab = 'subscribe'; vm.modalTitle = vm.defaultModalTitle">Subscribe as a new member</button>
+							ng-click="vm.tab = 'subscribe'; vm.modalTitle = 'Become a Member Today. It\'s Free!'">Subscribe as a new member</button>
 					</form>
 				</div>
 			</div>

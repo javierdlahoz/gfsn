@@ -5,7 +5,7 @@
 ?>
 <div class="gfsn-about-section">
 	<div class="container">
-		<div class="row">
+		<div class="row" onclick="goTo('/about-us');" style="cursor: pointer">
 			<div class="col-md-4 about-section-content">
 				<div class="about-section-icon">
 					<i class="fa fa-commenting"></i>
