@@ -56,7 +56,7 @@ function MemberController($scope, MemberService) {
 		vm.MemberService.createUser(vm.subscriber, function(response) {
 			if (response.success) {
 				vm.warningMessage = null;
-				vm.modalTitle = 'Thank you!';
+				vm.modalTitle = 'Thank You from Nonprofit Library';
 				vm.validated = response.validated;
 				vm.handleDownloads();
 			} else {

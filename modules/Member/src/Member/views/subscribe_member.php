@@ -14,10 +14,10 @@
 					<div ng-show="vm.retryMessage" class="text-center">
 						<p>
 							<big>
-								<b>One Last Step</b>, check the activation email sent to your mailbox by the system to activate your free membership
+								<b>One Last Step</b>, please check your email inbox to activate your free Nonprofit Library membership.
 							</big>
 						</p>
-						<small>Note: Please check your "junk" folder in case you can't find our activation email.</small>
+						Note: Please check your "junk" folder in case you can't find our activation email
 					</div>
 				</div>
 
