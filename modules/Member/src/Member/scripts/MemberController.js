@@ -22,6 +22,7 @@ function MemberController($scope, MemberService) {
 	vm.notarobot = true;
 	vm.alreadyAMember = false;
 	vm.modalTitle = vm.defaultModalTitle;
+	vm.wrongCredentialsMessage = 'Wrong credentials';
 	
 	vm.initialize = function() {
 		if (vm.getParameterByName('action') === 'download') {
@@ -74,6 +75,7 @@ function MemberController($scope, MemberService) {
 				vm.validated = response.validated;
 				vm.handleDownloads();
 			} else {
+				vm.wrongCredentialsMessage = response.data.message;
 				vm.wrongCredentials = true;
 			}
 		});
@@ -89,6 +91,8 @@ function MemberController($scope, MemberService) {
 				vm.validated = response.validated;
 				window.location.href = '/my-account/edit-account';
 			} else {
+				vm.wrongCredentialsMessage = response.data.message;
+				vm.messageToShow = false;
 				vm.wrongCredentials = true;
 			}
 		});

@@ -41,7 +41,7 @@
 							<input type="password" placeholder="Your Password" class="form-control" ng-model="vm.user.password"
 								minLength="5" required="required" name="password">
 						</div>
-						<div class="alert alert-danger" ng-show="vm.wrongCredentials">Wrong Credentials</div>
+						<div class="alert alert-danger" ng-show="vm.wrongCredentials">{{vm.wrongCredentialsMessage}}</div>
 						<a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a>
 						<button type="submit" class="btn member-btn">Login</button>
 						<button type="button" class="member-btn btn btn-default" 

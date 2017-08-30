@@ -74,12 +74,15 @@ class MemberController {
 	}
 
 	public function login() {
+		if(!username_exists($_POST['email'])) {
+			wp_send_json_error(array('message' => "Sorry that email doesn't appear to exist please try again."));
+		}
 		$user = wp_signon(array('user_login' => $_POST['email'], 'user_password' => $_POST['password'], 'remember' => true), false);
 		if (!is_wp_error($user)) {
 			$validated = $this->isUserValidated($user->ID);
 			return array('message' => 'Member successfully logged in', 'success' => true, 'validated' => $validated);
 		} else {
-			wp_send_json_error(array('message' => 'Wrong credentials'));
+			wp_send_json_error(array('message' => 'Please check your credentials'));
 		}
 	}
 
