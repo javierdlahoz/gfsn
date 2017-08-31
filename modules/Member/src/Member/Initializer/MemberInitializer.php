@@ -16,7 +16,8 @@ class MemberInitializer {
 		add_action('init', array(&$this, 'createValidateAccountPage'));
 
 		add_shortcode('gfsn-validate-account', array(&$this, 'addValidateAccountPage'));
-		add_shortcode('gfsn-subscribe-member', array(&$this, 'addSubscribeMember')); 
+		add_shortcode('gfsn-subscribe-member', array(&$this, 'addSubscribeMember'));
+		add_shortcode('gfsn-login', array(&$this, 'addLoginPage')); 
 		add_shortcode('gfsn-join-button', array(&$this, 'joinButton')); 
 
 		add_filter('wp_mail_content_type', array(&$this, 'setEmailsAsHtml'));
@@ -147,6 +148,12 @@ class MemberInitializer {
 	public function addSubscribeMember() {
 		ob_start();
 		include __DIR__ . '/../views/subscribe_member.php';
+		return ob_get_clean();
+	}
+
+	public function addLoginPage() {
+		ob_start();
+		include __DIR__ . '/../views/login.php';
 		return ob_get_clean();
 	}
 
