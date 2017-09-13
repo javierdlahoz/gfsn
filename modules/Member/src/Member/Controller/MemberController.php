@@ -27,7 +27,11 @@ class MemberController {
 			do_action('wp_login', $user->user_login, $user);	
 		}
 		$url = get_user_meta($user->ID, self::REDIRECT_URL, true);
-		wp_redirect($url . '?subscribe=yes');
+		if(strpos($url, '/product/')) {
+			wp_redirect($url . '?subscribe=yes');
+			return;		
+		}
+		wp_redirect('/library' . '?subscribe=yes');
 	}
 
 	public function nounce() {
