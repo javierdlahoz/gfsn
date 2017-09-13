@@ -1,5 +1,6 @@
 <div class="row" ng-app='gfsn' ng-controller="MemberController as vm" ng-cloak>
-	<div class="col-md-12">
+	<div class="col-md-6 col-md-offset-3 text-center">
+		<h4>Please enter your credentials</h4>
 		<form ng-submit="vm.login()">
 		<div class="form-group">
 			<input type="email" placeholder="Your Email" class="form-control" ng-model="vm.user.email" required="required" name="email">

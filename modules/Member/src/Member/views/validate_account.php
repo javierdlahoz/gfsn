@@ -2,7 +2,7 @@
 $user = wp_get_current_user();
 if($user->ID === 0) {
 	echo '<script type="text/javascript">
-		window.location.href = "/";
+		window.location.href = "/library";
 	</script>';
 }
 ?>
@@ -20,7 +20,7 @@ if($user->ID === 0) {
 					required="required" value="<?php echo $user->last_name; ?>">
 			</div>
 			<div class="form-group">
-				<small>Leave it blank if you don't want to change your password</small>
+				<div>Leave it blank if you don't want to change your password</div>
 				<input type="password" name="password" class="form-control" placeholder="Your Password" minLength="5">
 			</div>
 			<button type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>

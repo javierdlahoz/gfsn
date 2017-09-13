@@ -1,10 +1,7 @@
 <?php
 
-spl_autoload_register('autoloaderModules');
-
-function autoloaderModules($class){
+spl_autoload_register(function ($class){
     $initPath = __DIR__."/../modules/";
-
 
     if(strpos($class, '\\') !== false){
         $classExploded = explode("\\", $class);
@@ -29,4 +26,4 @@ function autoloaderModules($class){
             throw new \Exception("The class ".$class." couldn't be found");
         }
     }
-}
+});

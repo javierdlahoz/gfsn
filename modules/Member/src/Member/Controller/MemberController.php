@@ -15,8 +15,9 @@ class MemberController {
 	function __construct() {}
 
 	public static function updateCurrentUser() {
-		require_once('../../../wp-load.php');
-		$user = wp_get_current_user();
+		$wpPath = __DIR__ .'/../../../../../../../../wp-load.php';
+		require_once($wpPath);
+		$user = \wp_get_current_user();
 		wp_update_user(array('ID' => $user->ID, 'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name']));
 		
 		if(!empty($_POST['password'])) {
@@ -138,7 +139,7 @@ class MemberController {
 		$headers = 'From: info <'.get_option('admin_email').'>';
 		$to = $email;
 		$subject = 'One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership';
-		$message = '<p>Just one <a href="'.home_url('/').'?email_token='.$token.'">click to confirm your free subscription</a></p>';
+		$message = '<p>Just one <a href="'.home_url('/').'?email_token='.$token.'">click to confirm your free membership</a></p>';
 		$message .= '<p>Your temporary password is: <b>'.$password.'</b></p>';
 		$message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
 		MemberHelper::send($to, $subject, $message, $headers);		

@@ -11,7 +11,7 @@
  *
  */
 
-require __DIR__ . '/config/autoloader.php';
+require_once __DIR__ . '/config/autoloader.php';
 
 use Member\Initializer\MemberInitializer;
 use Member\Controller\MemberController;
