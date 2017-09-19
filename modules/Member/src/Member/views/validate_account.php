@@ -2,7 +2,7 @@
 $user = wp_get_current_user();
 if($user->ID === 0) {
 	echo '<script type="text/javascript">
-		//window.location.href = "/library";
+		window.location.href = "/library";
 	</script>';
 }
 ?>
