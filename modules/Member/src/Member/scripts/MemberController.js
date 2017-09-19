@@ -178,11 +178,7 @@ function MemberController($scope, MemberService) {
 	}
 
 	vm.toogleModal = function(show = true) {
-		if (show) {
-			jQuery("#subscribeModal").modal();	
-		} else {
-			jQuery("#subscribeModal").modal('hide');
-		}
+		openDownloadModal(show);
 	}
 
 	vm.getParameterByName = function(name) {

@@ -28,8 +28,7 @@
       	<div ng-hide="vm.messageToShow">
       		<form ng-submit="vm.createUser()" ng-show="vm.tab == 'subscribe'">
 	          <div class="form-group">
-							<input type="email" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" 
-								required="required" autofocus>
+							<input type="email" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" required="required">
 					    <input type="hidden" ng-model="vm.notarobot">
 					  </div>
 					  <!--div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div-->

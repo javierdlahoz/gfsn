@@ -2,13 +2,13 @@
 $user = wp_get_current_user();
 if($user->ID === 0) {
 	echo '<script type="text/javascript">
-		window.location.href = "/library";
+		//window.location.href = "/library";
 	</script>';
 }
 ?>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<h2>Complete Your Registration</h2>
+		<h2><?php the_title(); ?></h2>
 		<div class="alert alert-success">Please complete your first name and last name in the form below</div>
 		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form">
 			<input type="hidden" name="validate_account" value="true">
