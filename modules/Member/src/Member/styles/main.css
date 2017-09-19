@@ -23,6 +23,10 @@
 	z-index: 9999999;
 }
 
+.modal {
+	z-index: 9999999;
+}
+
 .modal-backdrop {
 	display: none;
 }

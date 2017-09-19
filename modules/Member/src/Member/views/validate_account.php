@@ -7,7 +7,8 @@ if($user->ID === 0) {
 }
 ?>
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Complete Your Registration</h2>
 		<div class="alert alert-success">Please complete your first name and last name in the form below</div>
 		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form">
 			<input type="hidden" name="validate_account" value="true">
