@@ -68,6 +68,10 @@
 	margin-bottom: 60px;
 }
 
+.control-label.required {
+	color:red;
+}
+
 .validate-account-form button{
 	padding: 10px;
 }

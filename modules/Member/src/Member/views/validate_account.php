@@ -13,12 +13,11 @@ if($user->ID === 0) {
 		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form">
 			<input type="hidden" name="validate_account" value="true">
 			<div class="form-group">
-				<input type="text" name="first_name" class="form-control" placeholder="Your First Name" 
-					required="required" value="<?php echo $user->first_name; ?>">
+				<label class="control-label required" id="first_name_label">This field is required *</label>
+				<input type="text" name="first_name" id="first_name" class="form-control" placeholder="Your First Name" value="<?php echo $user->first_name; ?>">
 			</div>
 			<div class="form-group">
-				<input type="text" name="last_name" class="form-control" placeholder="Your Last Name" 
-					required="required" value="<?php echo $user->last_name; ?>">
+				<input type="text" name="last_name" class="form-control" placeholder="Your Last Name" value="<?php echo $user->last_name; ?>">
 			</div>
 			<div class="form-group">
 				<div>Leave it blank if you don't want to change your password</div>
@@ -28,3 +27,24 @@ if($user->ID === 0) {
 		</form>
 	</div>
 </div>
+<script>
+	jQuery(document).ready(function() {
+		var user = {
+			email: '<?php echo $user->user_email; ?>'
+		};
+		subscribeUser(user);
+		toogleFirstNameRequiredLabel();
+		jQuery('#first_name').on('change', function() {
+			toogleFirstNameRequiredLabel();
+		});
+	});
+
+	function toogleFirstNameRequiredLabel() {
+		var firstName = jQuery('#first_name').val();
+		if(firstName) {
+			jQuery('#first_name_label').hide();
+		} else {
+			jQuery('#first_name_label').show();
+		}
+	}
+</script>
