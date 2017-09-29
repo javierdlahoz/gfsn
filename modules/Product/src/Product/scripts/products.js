@@ -9,14 +9,23 @@ function goTo(url = '/') {
 	window.location.href = url;
 }
 
+function getResource() {
+	return {
+		url: window.location.href,
+		title: document.title
+	};
+}
+
 function shareResourceToEmails(form) {
-	var form = jQuery('#collect-email-form');
+	window.collectForm = jQuery('#collect-email-form');
+	window.waitAlert = jQuery("#collect-email-wait");
+	window.successAlert = jQuery("#collect-email-success");
+
 	var alert = jQuery('#collect-email-error');
-	var successAlert = jQuery("#collect-email-success");
 	var emailList = jQuery('#collected-emails').val().replace(/ /g,'');
 	var emails = emailList.split(",");
 	jQuery(alert).hide();
-	jQuery(successAlert).hide();
+	jQuery(window.successAlert).hide();
 
 	for(var i=0; i < emails.length; i++) {
 		if(!validateEmailFromList(emails[i])){
@@ -25,9 +34,9 @@ function shareResourceToEmails(form) {
 			return false;
 		}
 	}
-	// subscribeEmails(emails);
-	jQuery(successAlert).show();
-	jQuery(form).hide();
+	
+	subscribeEmails(emails);
+	shareResource(emails);
 	return false;
 }
 
@@ -37,9 +46,26 @@ function validateEmailFromList(email) {
 }
 
 function subscribeEmails(emails) {
-	var user = {};
 	for(var i=0; i < emails.length; i++) { 
-		user = {email: emails[i], first_name: '', last_name: ''};
-		subscribeUser(user);
+		subscribeEmailToDrip(emails[i]);
 	}
+}
+
+function shareResource(emails) {
+	jQuery(window.collectForm).hide();
+	jQuery(window.waitAlert).show();
+	jQuery.ajax({
+		type: "POST",
+		url: '/wp-json/gfsn-api/membership/share-resource',
+		data: {emails: emails, resource: getResource()},
+		success: function(response) {
+			handleSuccessSharing();
+		},
+		dataType: 'json'
+	});
+}
+
+function handleSuccessSharing() {	
+	jQuery(window.waitAlert).hide();
+	jQuery(window.successAlert).show();
 }

@@ -120,6 +120,16 @@ class MemberController {
 		return (bool) get_user_meta($userId, self::VALIDATED, true);
 	}
 
+	public function sendEmailsForSharing() {
+		$emails = $_POST['emails'];
+		$resource = $_POST['resource'];
+
+		foreach($emails as $email) {
+			$this->sendShareResourceEmail($email, $resource);
+		}
+		return array('success' => true, 'message' => 'Emails Sent');
+	}
+
 	private function getMembershipPlanId() {
 		$plans = wc_memberships_get_membership_plans();
 		if ($plans) {
@@ -145,6 +155,17 @@ class MemberController {
 		$subject = 'One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership';
 		$message = '<p>Just one <a href="'.home_url('/').'?email_token='.$token.'">click to confirm your free membership</a></p>';
 		$message .= '<p>Your temporary password is: <b>'.$password.'</b></p>';
+		$message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
+		MemberHelper::send($to, $subject, $message, $headers);		
+	}
+
+	private function sendShareResourceEmail($email, $resource) {
+		$headers = 'From: info <'.get_option('admin_email').'>';
+		$to = $email;
+		$subject = 'Someone wants to share a cool resource with you';
+		$message = '<p>A Friend of you wants to show you a resource called <b><a href="'.$resource['url'].'">'
+			.$resource['title'].
+			'</a></b></p>';
 		$message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
 		MemberHelper::send($to, $subject, $message, $headers);		
 	}

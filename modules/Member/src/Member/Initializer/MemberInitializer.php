@@ -61,6 +61,13 @@ class MemberInitializer {
 			));
 		});
 
+		add_action('rest_api_init', function() {
+			register_rest_route( 'gfsn-api', '/membership/share-resource', array(
+				'methods' => 'POST',
+				'callback' => array(&$this->memberController, 'sendEmailsForSharing'),
+			));
+		});
+
 		add_action('woocommerce_single_product_summary', array(&$this, 'addDownloadButton'), 30);
 	}
 

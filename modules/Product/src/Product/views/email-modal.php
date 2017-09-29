@@ -10,9 +10,12 @@
         <div class="alert alert-success" style="display:none" id="collect-email-success">
           Resource Shared Successfully
         </div>
+        <div class="alert alert-warning" style="display:none" id="collect-email-wait">
+          Please wait
+        </div>
         <form onsubmit="return shareResourceToEmails(this)" id="collect-email-form">
           <div class="form-group">
-            <p>Add multiple emails separated by ";"</p>
+            <p>Add multiple emails separated by a comma: ","</p>
             <input type="text" class="form-control" placeholder="Emails" id="collected-emails" required="required">
             <!--p class="email-error" ng-show="vm.wrongEmail">Please enter a valid email address</p-->
           </div>

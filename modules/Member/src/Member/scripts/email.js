@@ -10,3 +10,12 @@ function subscribeUser(user){
 	}]);
 	_dcq.push(["subscribe", { campaign_id: campaignId, fields: { email: user.email }}]);
 }
+
+function subscribeEmailToDrip(email){
+	var campaignId = window.campaignId;
+	var response = _dcq.push(["identify", {
+		email: email,
+		tags: ["Customer"]
+	}]);
+	_dcq.push(["subscribe", { campaign_id: campaignId, fields: { email: email }}]);
+}
