@@ -12,7 +12,7 @@ class MemberInitializer {
 	
 	function __construct() {
 		$this->memberController = new MemberController();
-		add_action('wp_loaded', array(&$this, 'initializePlugin'));
+		add_action('wp_loaded', array(&$this, 'initializePlugin'), 1);
 		add_action('init', array(&$this, 'createValidateAccountPage'));
 
 		add_shortcode('gfsn-validate-account', array(&$this, 'addValidateAccountPage'));

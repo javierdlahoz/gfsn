@@ -16,19 +16,18 @@
 	      	<div ng-show="vm.retryMessage">
 	      		<p>
 	      			<big>
-	      				<b>One Last Step</b>, check the activation email sent to your mailbox by the system to activate your free membership
+	      				<b>One Last Step</b>, please check the activation email sent to your inbox to activate your free membership!
 	      			</big>
 	      		</p>
-	      		<small>Note: Please check your "junk" folder in case you can't find our activation email.</small>
-	      		<!--button class="btn btn-success" ng-click="vm.retryDownloadFiles()">Retry</button>
-	      		<button class="btn btn-primary" ng-click="vm.resendEmail()">Resend Email</button-->
+	      		<span>Note: Please check your "junk" folder in case you can't find our activation email.</span>
 	      	</div>
 	      </div>
       	
       	<div ng-hide="vm.messageToShow">
       		<form ng-submit="vm.createUser()" ng-show="vm.tab == 'subscribe'">
 	          <div class="form-group">
-							<input type="email" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" required="required">
+							<input type="text" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" required="required">
+							<p class="email-error" ng-show="vm.wrongEmail">Please enter a valid email address</p>
 					    <input type="hidden" ng-model="vm.notarobot">
 					  </div>
 					  <!--div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div-->

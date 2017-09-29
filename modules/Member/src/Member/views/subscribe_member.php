@@ -10,22 +10,22 @@
 					<div class="alert alert-{{vm.warningMessageType}}" ng-show="vm.warningMessage">{{vm.warningMessage}}</div>
 					<button type="button" class="member-btn btn btn-default" ng-show="vm.alreadyAMember"
 						ng-click="vm.messageToShow = false; vm.tab = 'login'; vm.modalTitle = 'Log in for Instant Access'">Already a Member?</button>
-
 					<div ng-show="vm.retryMessage" class="text-center">
 						<p>
 							<big>
-								<b>One Last Step</b>, please check your email inbox to activate your free Nonprofit Library membership.
+								<b>One Last Step</b>, please check the activation email sent to your inbox to activate your free membership!
 							</big>
 						</p>
-						Note: Please check your "junk" folder in case you can't find our activation email
+						<span>Note: Please check your "junk" folder in case you can't find our activation email.</span>
 					</div>
 				</div>
 
 				<div ng-hide="vm.messageToShow">
 					<form ng-submit="vm.createUser()" ng-show="vm.tab == 'subscribe'">
 						<div class="form-group">
-							<input type="email" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" 
+							<input type="text" class="form-control" placeholder="Your Email" id="email" ng-model="vm.subscriber.email" 
 								required="required" autofocus>
+								<p class="email-error" ng-show="vm.wrongEmail">Please enter a valid email address</p>
 							<input type="hidden" ng-model="vm.notarobot">
 						</div>
 						<!--div class="g-recaptcha" data-sitekey="6LcI1CcUAAAAALqCBdun8-YyGVMYZgz6--B1sy4S" data-callback="onCaptchaSuccess"></div-->

@@ -23,6 +23,18 @@ function MemberController($scope, MemberService) {
 	vm.alreadyAMember = false;
 	vm.modalTitle = vm.defaultModalTitle;
 	vm.wrongCredentialsMessage = 'Wrong credentials';
+	vm.wrongEmail = false;
+	vm.emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+	vm.checkEmail = function(object) {
+		if (object.email.match(vm.emailRegex)) {
+			vm.wrongEmail = false;
+			return true;
+		} else {
+			vm.wrongEmail = true;
+			return false;
+		}
+	}
 	
 	vm.initialize = function() {
 		if (vm.getParameterByName('action') === 'download') {
@@ -47,25 +59,27 @@ function MemberController($scope, MemberService) {
 	}
 
 	vm.createUser = function() {
-		if(vm.notarobot !== true) {
-			return false;
-		}
-		vm.initializeForms();
-		vm.messageToShow = true;
-		vm.warningMessage = 'Please wait';
-
-		vm.MemberService.createUser(vm.subscriber, function(response) {
-			if (response.success) {
-				vm.warningMessage = null;
-				vm.modalTitle = 'Thank You from Nonprofit Library';
-				vm.validated = response.validated;
-				vm.handleDownloads();
-			} else {
-				vm.warningMessage = 'This email is already in use. Already a member?';
-				vm.warningMessageType = 'danger';
-				vm.alreadyAMember = true;
+		if (vm.checkEmail(vm.subscriber)) {
+			if(vm.notarobot !== true) {
+				return false;
 			}
-		});
+			vm.initializeForms();
+			vm.messageToShow = true;
+			vm.warningMessage = 'Please wait';
+	
+			vm.MemberService.createUser(vm.subscriber, function(response) {
+				if (response.success) {
+					vm.warningMessage = null;
+					vm.modalTitle = 'Thank You from Nonprofit Library';
+					vm.validated = response.validated;
+					vm.handleDownloads();
+				} else {
+					vm.warningMessage = 'This email is already in use. Already a member?';
+					vm.warningMessageType = 'danger';
+					vm.alreadyAMember = true;
+				}
+			});
+		}
 	}
 
 	vm.login = function() {

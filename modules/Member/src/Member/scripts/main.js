@@ -1,4 +1,4 @@
-angular.module('gfsn', []);
+window.gfsn = angular.module('gfsn', []);
 function goTo(url) {
 	window.location.href = url;
 }

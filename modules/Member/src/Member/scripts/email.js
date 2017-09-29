@@ -1,5 +1,7 @@
+window.campaignId = '14740912';
+
 function subscribeUser(user){
-	var campaignId = '14740912';
+	var campaignId = window.campaignId;
 	var response = _dcq.push(["identify", {
 		email: user.email,
 		first_name: user.first_name,
