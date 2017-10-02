@@ -163,9 +163,9 @@ class MemberController {
 		$headers = 'From: info <'.get_option('admin_email').'>';
 		$to = $email;
 		$subject = 'Someone wants to share a cool resource with you';
-		$message = '<p>A Friend of you wants to show you a resource called <b><a href="'.$resource['url'].'">'
+		$message = '<p>Check out this awesome nonprofit resource I found at The Nonprofit Library called <b><a href="'.$resource['url'].'">'
 			.$resource['title'].
-			'</a></b></p>';
+			'</a></b></p><p>#nonprofit #Free</p>';
 		$message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
 		MemberHelper::send($to, $subject, $message, $headers);		
 	}

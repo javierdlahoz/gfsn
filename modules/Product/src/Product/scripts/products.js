@@ -69,3 +69,19 @@ function handleSuccessSharing() {
 	jQuery(window.waitAlert).hide();
 	jQuery(window.successAlert).show();
 }
+
+function shareResourceOnFacebook() {
+	FB.ui({
+		method: 'feed',
+		link: window.location.href,
+		caption: 'Check out this awesome nonprofit resource I found at Nonprofit Library. #nonprofit #Free via @charityhowto',
+	}, function(response){});
+}
+
+function shareResourceOnTwitter() {
+	var text = 'Check out this awesome nonprofit resource.';
+	var resourceUrl = window.location.href;
+	var url = "https://twitter.com/intent/tweet?text=" + text + "&url=" + resourceUrl + "&hashtags=free,nonprofit&via=charityhowto";
+	var win = window.open(url, '_blank');
+  win.focus();
+}

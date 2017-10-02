@@ -15,7 +15,7 @@
         </div>
         <form onsubmit="return shareResourceToEmails(this)" id="collect-email-form">
           <div class="form-group">
-            <p>Add multiple emails separated by a comma: ","</p>
+            <p>Do you want to share this with? <small class="email-modal-small-info">(Separate addresses with commas)</small></p>
             <input type="text" class="form-control" placeholder="Emails" id="collected-emails" required="required">
             <!--p class="email-error" ng-show="vm.wrongEmail">Please enter a valid email address</p-->
           </div>
