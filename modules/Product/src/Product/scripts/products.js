@@ -58,7 +58,7 @@ function shareResource(emails) {
 		type: "POST",
 		url: '/wp-json/gfsn-api/membership/share-resource',
 		data: {emails: emails, resource: getResource()},
-		success: function(response) {
+		success: function() {
 			handleSuccessSharing();
 		},
 		dataType: 'json'
@@ -71,11 +71,7 @@ function handleSuccessSharing() {
 }
 
 function shareResourceOnFacebook() {
-	FB.ui({
-		method: 'feed',
-		link: window.location.href,
-		caption: 'Check out this awesome nonprofit resource I found at Nonprofit Library. #nonprofit #Free via @nonprofit_lib',
-	}, function(response){});
+    FB.ui({method: 'share', href: window.location.href});
 }
 
 function shareResourceOnTwitter() {

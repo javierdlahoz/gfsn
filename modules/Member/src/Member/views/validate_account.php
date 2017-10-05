@@ -20,7 +20,7 @@ if($user->ID === 0) {
 				<input type="text" name="last_name" class="form-control" placeholder="Your Last Name" value="<?php echo $user->last_name; ?>">
 			</div>
 			<div class="form-group">
-				<div>Leave it blank if you don't want to change your password</div>
+				<div>To change your password, enter a new password below:</div>
 				<input type="password" name="password" class="form-control" placeholder="Your Password" minLength="5">
 			</div>
 			<button type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>
