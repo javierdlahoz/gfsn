@@ -16,7 +16,7 @@ function getResource() {
 	};
 }
 
-function shareResourceToEmails(form) {
+function shareResourceToEmails() {
 	window.collectForm = jQuery('#collect-email-form');
 	window.waitAlert = jQuery("#collect-email-wait");
 	window.successAlert = jQuery("#collect-email-success");
@@ -74,14 +74,23 @@ function shareResourceOnFacebook() {
 	FB.ui({
 		method: 'feed',
 		link: window.location.href,
-		caption: 'Check out this awesome nonprofit resource I found at Nonprofit Library. #nonprofit #Free via @charityhowto',
+		caption: 'Check out this awesome nonprofit resource I found at Nonprofit Library. #nonprofit #Free via @nonprofit_lib',
 	}, function(response){});
 }
 
 function shareResourceOnTwitter() {
 	var text = 'Check out this awesome nonprofit resource.';
 	var resourceUrl = window.location.href;
-	var url = "https://twitter.com/intent/tweet?text=" + text + "&url=" + resourceUrl + "&hashtags=free,nonprofit&via=charityhowto";
+	var url = "https://twitter.com/intent/tweet?text=" + text + "&url=" + resourceUrl + "&hashtags=free,nonprofit&via=nonprofit_lib";
 	var win = window.open(url, '_blank');
-  win.focus();
+  	win.focus();
+}
+
+function shareResourceOnLinkedin() {
+    var text = 'Check out this awesome nonprofit resource.';
+    var resourceUrl = window.location.href;
+    var url = "http://www.linkedin.com/shareArticle?mini=true&url=" + resourceUrl;
+    url += "&title=" + text;
+    var win = window.open(url, '_blank');
+    win.focus();
 }

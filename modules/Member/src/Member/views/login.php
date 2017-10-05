@@ -10,7 +10,7 @@
 				minLength="5" required="required" name="password">
 		</div>
 		<div class="alert alert-danger" ng-show="vm.wrongCredentials">{{vm.wrongCredentialsMessage}}</div>
-		<a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a>
+		<a href="/my-account/lost-password">Forgot your password?</a>
 		<button type="submit" class="btn member-btn">Login</button>
 	</form>
 	</div>

@@ -10,7 +10,6 @@ class ProductInitializer {
 
         $this->enqueStyles();
         add_action('wp_loaded', array(&$this, 'enqueScripts'), 99);
-        //$this->enqueScripts();
 
         add_action('widgets_init', array(&$this, 'registerCategoriesWidget'));
         add_shortcode('gfsn-about-section', array(&$this, 'aboutSection'));
@@ -18,7 +17,6 @@ class ProductInitializer {
         add_filter('woocommerce_product_tabs', array(&$this, 'removeTabs'), 20);
         add_action('woocommerce_single_product_summary', array(&$this, 'addProductDetails'), 31);
         add_action('woocommerce_single_product_summary', array(&$this, 'addShareProduct'), 51);
-        // add_action('woocommerce_single_product_summary', array(&$this, 'addProductDescription'), 51);
     }
 
     public function enqueScripts() {
