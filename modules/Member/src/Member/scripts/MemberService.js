@@ -20,6 +20,7 @@ function MemberService($http) {
 		},
 
 		createUser: function(user, callback) {
+      user.tag = localStorage.getItem('tag');
 			$http({
         url: baseUrl,
         method: "POST",

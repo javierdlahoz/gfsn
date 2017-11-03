@@ -12,7 +12,7 @@ function MemberController($scope, MemberService) {
 	vm.localProductId = null;
 	vm.userLoggedIn = false;
 	vm.user = {email: null, password: null};
-	vm.subscriber = {email: null, redirectUrl: window.location.href};
+	vm.subscriber = {email: null, redirectUrl: window.location.origin + window.location.pathname};
 	vm.tab = 'subscribe';
 	vm.messageToShow = false;
 	vm.retryMessage = false;

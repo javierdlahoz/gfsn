@@ -11,11 +11,7 @@ class MemberController
     const VALIDATED = 'email_validated';
     const INITIAL_PASSWORD = 'initial_password';
     const REDIRECT_URL = 'gfsn-redirect-url';
-
-
-    function __construct()
-    {
-    }
+    const TAG = 'gfsn-tag';
 
     public static function updateCurrentUser()
     {
@@ -55,15 +51,17 @@ class MemberController
         $uniqueToken = uniqid();
 
         $user = wp_create_user($_POST['email'], $password, $_POST['email']);
-        // wp_update_user(array('ID' => $user, 'first_name' => $_POST['firstName'], 'last_name' => $_POST['lastName']));
 
         if ($user) {
             update_user_meta($user, self::UNIQUE_TOKEN, $uniqueToken);
             update_user_meta($user, self::VALIDATED, false);
             update_user_meta($user, self::INITIAL_PASSWORD, $password);
             update_user_meta($user, self::REDIRECT_URL, $_POST['redirectUrl']);
+            if ($_POST['tag']) {
+                update_user_meta($user, self::TAG, $_POST['tag']);
+            }
 
-            $this->sendConfirmEmail($_POST['email'], $uniqueToken, $password);
+            $this->sendConfirmEmail($_POST['email'], $uniqueToken, $password, $_POST['tag']);
 
             // wp_signon(array('user_login' => $_POST['email'], 'user_password' => $password, 'remember' => true), false);
             return array('message' => 'Member successfully subscribed', 'validated' => false, 'success' => true);
@@ -165,12 +163,17 @@ class MemberController
         }
     }
 
-    private function sendConfirmEmail($email, $token, $password)
+    private function sendConfirmEmail($email, $token, $password, $tag = null)
     {
+        $url = home_url('/') . '?email_token=' . $token;
+        if ($tag) {
+            $url .= '&dtag=' . $tag;
+        }
+
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
         $subject = 'One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership';
-        $message = '<p>Just one <a href="' . home_url('/') . '?email_token=' . $token . '">click to confirm your free membership</a></p>';
+        $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
         $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
         $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
         MemberHelper::send($to, $subject, $message, $headers);
