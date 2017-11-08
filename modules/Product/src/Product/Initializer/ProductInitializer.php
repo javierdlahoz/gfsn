@@ -3,6 +3,7 @@
 namespace Product\Initializer;
 
 use Product\Widget\CategoryWidget;
+use Member\Controller\MemberController;
 
 class ProductInitializer {
 
@@ -17,6 +18,19 @@ class ProductInitializer {
         add_filter('woocommerce_product_tabs', array(&$this, 'removeTabs'), 20);
         add_action('woocommerce_single_product_summary', array(&$this, 'addProductDetails'), 31);
         add_action('woocommerce_single_product_summary', array(&$this, 'addShareProduct'), 51);
+        add_filter('manage_product_posts_columns', array(&$this, 'downloadedTimesHead'));
+        add_action('manage_product_posts_custom_column' , array(&$this, 'addDownloadedTimes'), 10, 2 );
+    }
+
+    public function downloadedTimesHead($defaults) {
+        $defaults['downloaded_times'] = 'Downloads';
+        return $defaults;
+    }
+
+    public function addDownloadedTimes($column, $postId) {
+        if ($column === 'downloaded_times') {
+            echo (int) \get_post_meta($postId, MemberController::DOWNLOADED_TIMES, true);
+        }
     }
 
     public function enqueScripts() {

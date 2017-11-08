@@ -8,9 +8,11 @@ class MemberController
 {
 
     const UNIQUE_TOKEN = 'unique_token';
+    const DOWNLOADED_PRODUCTS = 'downloaded_products';
     const VALIDATED = 'email_validated';
     const INITIAL_PASSWORD = 'initial_password';
     const REDIRECT_URL = 'gfsn-redirect-url';
+    const DOWNLOADED_TIMES = 'downloaded_times';
     const TAG = 'gfsn-tag';
 
     public static function updateCurrentUser()
@@ -69,6 +71,21 @@ class MemberController
             wp_send_json_error($user);
         }
 
+    }
+
+    public function trackDownloads()
+    {
+        $productId = $_POST['productId'];
+        $user = \wp_get_current_user();
+        $downloadedProducts = get_user_meta($user->ID, self::DOWNLOADED_PRODUCTS, true);
+        $downloadedTimes = (int) \get_post_meta($productId, self::DOWNLOADED_TIMES, true);
+        \update_post_meta($productId, self::DOWNLOADED_TIMES, ($downloadedTimes + 1));
+
+        if (!in_array($productId, $downloadedProducts)) {
+            $downloadedProducts[] = $productId;
+        }
+        update_user_meta($user->ID, self::DOWNLOADED_PRODUCTS, $downloadedProducts);
+        return array('message' => 'Product download tracked successfully');
     }
 
     public function files()
@@ -184,13 +201,13 @@ class MemberController
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
         $subject = $fname . ' ' . $lname . ' would like to share a free nonprofit resource from ' . get_bloginfo('name') . ' with you';
-        $message = '<p><b>' . $fname . ' ' . $lname . '</b> would like to share a free nonprofit resource from 
+        $message = '<p><b>' . $fname . ' ' . $lname . '</b> would like to share a free nonprofit resource from
             <a href="' . get_site_url() . '">' . get_site_url() . '</a> with you</p>';
         $message .= '<p>Check out this resource at ' . get_bloginfo('name') . ' called <b><a href="' . $resource['url'] . '">'
             . $resource['title'] .
             '</a></b></p>';
-        $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> 
-            today, we are frequently adding more valuable free resources at 
+        $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>
+            today, we are frequently adding more valuable free resources at
             <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
         MemberHelper::send($to, $subject, $message, $headers);
     }

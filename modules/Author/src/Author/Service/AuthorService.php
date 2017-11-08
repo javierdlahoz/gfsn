@@ -59,7 +59,8 @@ class AuthorService {
           'value' => '"'.$authorId.'"',
           'compare' => 'LIKE',
         )
-      )
+      ),
+      'posts_per_page' => -1
     );
     $products = get_posts($args);
     return $products;

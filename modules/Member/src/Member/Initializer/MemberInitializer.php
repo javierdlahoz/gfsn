@@ -25,6 +25,9 @@ class MemberInitializer {
 		add_filter('user_contactmethods', array(&$this, 'isUserValidatedHeader'), 10, 1);
 		add_filter('manage_users_columns', array(&$this, 'addUserValidatedColumn'));
 		add_filter('manage_users_custom_column', array(&$this, 'addUserValidatedRow'), 10, 3);
+
+		add_action('show_user_profile', array(&$this, 'showDownloadedProducts'), 50);
+		add_action('edit_user_profile', array(&$this, 'showDownloadedProducts'), 50);
 		
 		add_action('rest_api_init', function() {
 			register_rest_route( 'gfsn-api', '/membership', array(
@@ -68,6 +71,13 @@ class MemberInitializer {
 			));
 		});
 
+		add_action('rest_api_init', function() {
+			register_rest_route( 'gfsn-api', '/membership/track-resource', array(
+				'methods' => 'POST',
+				'callback' => array(&$this->memberController, 'trackDownloads'),
+			));
+		});
+
 		add_action('woocommerce_single_product_summary', array(&$this, 'addDownloadButton'), 30);
 	}
 
@@ -78,6 +88,10 @@ class MemberInitializer {
 
 	public function addDownloadButton() {
 		include __DIR__ . '/../views/download_button.php';
+	}
+
+	public function showDownloadedProducts($user) {
+		include __DIR__ . '/../views/downloaded_products.php';
 	}
 
 	public function setEmailsAsHtml() {

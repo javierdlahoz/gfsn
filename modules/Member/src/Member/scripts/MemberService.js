@@ -62,6 +62,19 @@ function MemberService($http) {
       		window.location.href = '?action=download';
       	}
       });
+    },
+    
+    trackResource: function(productId, callback) {
+			$http({
+        url: baseUrl + '/track-resource?_wpnonce=' + ajaxObject.nonce,
+        method: "POST",
+        data: jQuery.param({productId: productId}),
+        headers: contentType
+      }).then(function (response) {
+        return callback(response.data);
+      }).catch(function (error) {
+      	console.log('error tracking a resource', error);
+      });
 		}
 	}
 }

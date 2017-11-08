@@ -23,7 +23,8 @@ if($user->ID === 0) {
 				<div>To change your password, enter a new password below:</div>
 				<input type="password" name="password" class="form-control" placeholder="Your Password" minLength="5">
 			</div>
-			<button type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>
+			<div class="alert alert-warning" id="validate-alert">Please Wait, validating your account</div>
+			<button id="validate-button" style="display: none" type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>
 		</form>
 	</div>
 </div>
@@ -37,6 +38,10 @@ if($user->ID === 0) {
 		jQuery('#first_name').on('change', function() {
 			toogleFirstNameRequiredLabel();
 		});
+		setTimeout(function() {
+			jQuery('#validate-alert').hide();
+			jQuery('#validate-button').show();
+		}, 5000);
 	});
 
 	function toogleFirstNameRequiredLabel() {

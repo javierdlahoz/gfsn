@@ -46,10 +46,9 @@ function MemberController($scope, MemberService) {
 
 	vm.downloadFiles = function(productId) {
 		vm.localProductId = productId;
-
 		if (vm.userLoggedIn) {
 			if (vm.validated) {
-				vm.getFilesAndDownload(productId);	
+				vm.getFilesAndDownload(productId);
 			} else {
 				vm.handleDownloads();
 			}
@@ -142,6 +141,7 @@ function MemberController($scope, MemberService) {
 	}
 
 	vm.getFilesAndDownload = function() {
+		vm.trackResource(vm.localProductId);
 		vm.MemberService.getFilesFromProduct(vm.localProductId, function(response) {
 			for(var i = 0; i < response.files.length; i ++ ) {
 				vm.downloadFile(response.files[i]);
@@ -203,6 +203,12 @@ function MemberController($scope, MemberService) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	vm.trackResource = function(productId) {
+		vm.MemberService.trackResource(productId, function(response) {
+			console.log(response);
+		});
 	}
 
 	vm.initialize();
