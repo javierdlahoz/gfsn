@@ -28,6 +28,8 @@ class MemberInitializer {
 
 		add_action('show_user_profile', array(&$this, 'showDownloadedProducts'), 50);
 		add_action('edit_user_profile', array(&$this, 'showDownloadedProducts'), 50);
+		add_action('send_first_reminder_email', array(&$this, 'sendFirstReminderEmail'), 10, 1);
+		add_action('send_second_reminder_email', array(&$this, 'sendSecondReminderEmail'), 10, 1);
 		
 		add_action('rest_api_init', function() {
 			register_rest_route( 'gfsn-api', '/membership', array(
@@ -112,6 +114,14 @@ class MemberInitializer {
 	public function addUserValidatedColumn($column) {
 		$column['validated'] = 'Validated';
 		return $column;
+	}
+
+	public function sendFirstReminderEmail($user) {
+		$this->memberController->sendFirstConfirmationReminderEmail($user);
+	}
+
+	public function sendSecondReminderEmail($user) {
+		$this->memberController->sendSecondConfirmationReminderEmail($user);
 	}
 
 	public function addUserValidatedRow($val, $column, $userId) {

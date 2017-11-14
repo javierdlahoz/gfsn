@@ -14,6 +14,8 @@ class MemberController
     const REDIRECT_URL = 'gfsn-redirect-url';
     const DOWNLOADED_TIMES = 'downloaded_times';
     const TAG = 'gfsn-tag';
+    const TWO_DAYS_INTERVAL = 'P2D';
+    const ONE_DAY_INTERVAL = 'P1D';
 
     public static function updateCurrentUser()
     {
@@ -64,13 +66,12 @@ class MemberController
             }
 
             $this->sendConfirmEmail($_POST['email'], $uniqueToken, $password, $_POST['tag']);
+            $this->scheduleFirstReminderEmail($user);
 
-            // wp_signon(array('user_login' => $_POST['email'], 'user_password' => $password, 'remember' => true), false);
             return array('message' => 'Member successfully subscribed', 'validated' => false, 'success' => true);
         } else {
             wp_send_json_error($user);
         }
-
     }
 
     public function trackDownloads()
@@ -159,6 +160,45 @@ class MemberController
         return array('success' => true, 'message' => 'Emails Sent');
     }
 
+    public function sendFirstConfirmationReminderEmail($userId)
+    {
+        $user = get_user_by('ID', $userId);
+        if (!$this->isUserValidated($userId)) {
+            $uniqueToken = get_user_meta($user->ID, self::UNIQUE_TOKEN, true);
+            $password = get_user_meta($user->ID, self::INITIAL_PASSWORD, true);
+            $tag = get_user_meta($user->ID, self::TAG, true);
+            $this->sendFirstReminderEmail($user->user_email, $uniqueToken, $password, $tag);
+            $this->scheduleSecondReminderEmail($user->ID);
+        }
+    }
+
+    public function sendSecondConfirmationReminderEmail($userId)
+    {
+        $user = get_user_by('ID', $userId);
+        if (!$this->isUserValidated($userId)) {
+            $uniqueToken = get_user_meta($user->ID, self::UNIQUE_TOKEN, true);
+            $password = get_user_meta($user->ID, self::INITIAL_PASSWORD, true);
+            $tag = get_user_meta($user->ID, self::TAG, true);
+            $this->sendSecondReminderEmail($user->user_email, $uniqueToken, $password, $tag);
+        }
+    }
+
+    private function scheduleFirstReminderEmail($userId = null) 
+    {
+        $time = new \DateTime();
+        $time->add(new \DateInterval(self::TWO_DAYS_INTERVAL));
+        $event = wp_schedule_single_event($time->getTimestamp(), 'send_first_reminder_email', [$userId]);
+        //$this->sendFirstConfirmationReminderEmail($user);
+    }
+
+    private function scheduleSecondReminderEmail($userId = null) 
+    {
+        $time = new \DateTime();
+        $time->add(new \DateInterval(self::ONE_DAY_INTERVAL));
+        $event = wp_schedule_single_event($time->getTimestamp(), 'send_second_reminder_email', [$userId]);
+        //$this->sendSecondConfirmationReminderEmail($user);
+    }
+
     private function getMembershipPlanId()
     {
         $plans = wc_memberships_get_membership_plans();
@@ -190,6 +230,40 @@ class MemberController
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
         $subject = 'One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership';
+        $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
+        $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
+        $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
+        MemberHelper::send($to, $subject, $message, $headers);
+    }
+
+    private function sendFirstReminderEmail($email, $token, $password, $tag = null)
+    {
+        $url = home_url('/') . '?email_token=' . $token;
+        if ($tag) {
+            $url .= '&dtag=' . $tag;
+        }
+
+        $headers = 'From: info <' . get_option('admin_email') . '>';
+        $to = $email;
+        $subject = "Thanks for visiting Nonprofit Library - Confirm Your Membership Today!";
+        $message = '<p>Thank you for visiting Nonprofit Library. We are frequently adding new FREE resources to help you and your nonprofit organization.</p>';
+        $message .= '<p>Confirm your membership today to have instant access to our entire resource library.<br>';
+        $message .= '<a href="' . $url . '">click to confirm your free membership</a></p>';
+        $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
+        MemberHelper::send($to, $subject, $message, $headers);
+    }
+
+    private function sendSecondReminderEmail($email, $token, $password, $tag = null)
+    {
+        $url = home_url('/') . '?email_token=' . $token;
+        if ($tag) {
+            $url .= '&dtag=' . $tag;
+        }
+
+        $headers = 'From: info <' . get_option('admin_email') . '>';
+        $to = $email;
+        $subject = "One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership";
+        $message = '<p>Free Instant Access Educational Resources for Nonprofit Professionals!</p>';
         $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
         $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
         $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
