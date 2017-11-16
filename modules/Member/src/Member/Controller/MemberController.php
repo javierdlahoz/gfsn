@@ -232,7 +232,7 @@ class MemberController
         $subject = 'One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership';
         $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
         $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
-        $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
+        $message .= '<br><p>We are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">Nonprofit Library</a>, enjoy!</p>';
         MemberHelper::send($to, $subject, $message, $headers);
     }
 
@@ -266,7 +266,7 @@ class MemberController
         $message = '<p>Free Instant Access Educational Resources for Nonprofit Professionals!</p>';
         $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
         $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
-        $message .= '<br><p>Please bookmark <a href="nonprofitlibrary.com">nonprofitlibrary.com</a> today, we are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">nonprofitlibrary.com</a>, enjoy!</p>';
+        $message .= '<br><p>We are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">Nonprofit Library</a>, enjoy!</p>';
         MemberHelper::send($to, $subject, $message, $headers);
     }
 
