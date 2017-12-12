@@ -44,7 +44,7 @@
 								minLength="5" required="required" name="password">
 						</div>
 						<div class="alert alert-danger" ng-show="vm.wrongCredentials">{{vm.wrongCredentialsMessage}}</div>
-						<a href="<?php echo wp_lostpassword_url(); ?>">Forgot your password?</a>
+						<a href="/my-account/lost-password/">Forgot your password?</a>
 						<button type="submit" class="btn member-btn">Login</button>
 						<button type="button" class="member-btn btn btn-default" 
 							ng-click="vm.tab = 'subscribe'; vm.modalTitle = 'Become a Member Today. It\'s Free!'">Subscribe as a new member</button>

@@ -11,9 +11,8 @@ class MemberHelper
     $token = sha1(uniqid());
     $oldData = get_option(self::PREFIX .'data') ?: array();
     $data = array();
-    $data[$token] = $_POST;
     update_option(self::PREFIX .'data', array_merge($oldData, $data));
-    wp_mail($to, $subject, sprintf($message, $token), $headers);
+    wp_mail($to, $subject, $message, $headers);
   }
 
   public static function check($token)

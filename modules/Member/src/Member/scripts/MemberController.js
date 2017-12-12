@@ -6,7 +6,7 @@ function onCaptchaSuccess() {
 
 function MemberController($scope, MemberService) {
 	var vm = this;
-	vm.defaultModalTitle = "To Download, Become a Member Today. It's Free!";
+	vm.defaultModalTitle = "To Download " + document.title.split(' - ')[0] + " fill out the form below";
 	vm.MemberService = MemberService;
 	vm.validated = false;
 	vm.localProductId = null;
@@ -89,6 +89,22 @@ function MemberController($scope, MemberService) {
 				vm.handleDownloads();
 			} else {
 				vm.wrongCredentialsMessage = response.data.message;
+				vm.wrongCredentials = true;
+			}
+		});
+	}
+
+	vm.loginAndRedirect = function() {
+		vm.initializeForms();
+		vm.loading = true;
+		vm.MemberService.login(vm.user, function(response) {
+			if (response.success) {
+				vm.validated = response.validated;
+				vm.loading = false;
+				window.location.href = '/my-account/edit-account';
+			} else {
+				vm.wrongCredentialsMessage = response.data.message;
+				vm.loading = false;
 				vm.wrongCredentials = true;
 			}
 		});

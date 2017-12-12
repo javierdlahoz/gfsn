@@ -81,6 +81,10 @@
 	padding: 5px 40px;
 }
 
+.modal-title {
+	font-size: 21px;
+}
+
 @media (max-width: 480px) {
 	.btn.gfsn-btn-join {
 		font-size: 16px;

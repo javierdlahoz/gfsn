@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Great Free Stuffs for Nonprofit Plugin
+ * Plugin Name: Nonprofit Library Plugin
  * Plugin URI: https://local.gfsn.com/
  * Description: Custom build
  * Version: 1.1

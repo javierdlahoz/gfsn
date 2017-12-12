@@ -102,10 +102,11 @@ class MemberController
 
     public function login()
     {
-        if (!username_exists($_POST['email'])) {
+        $user = get_user_by('email', $_POST['email']);
+        if (!$user) {
             wp_send_json_error(array('message' => "Sorry that email doesn't appear to exist please try again."));
         }
-        $user = wp_signon(array('user_login' => $_POST['email'], 'user_password' => $_POST['password'], 'remember' => true), false);
+        $user = wp_signon(array('user_login' => $user->user_login, 'user_password' => $_POST['password'], 'remember' => true), false);
         if (!is_wp_error($user)) {
             $validated = $this->isUserValidated($user->ID);
             return array('message' => 'Member successfully logged in', 'success' => true, 'validated' => $validated);
@@ -226,13 +227,14 @@ class MemberController
         if ($tag) {
             $url .= '&dtag=' . $tag;
         }
+        ob_start();
+        include(__DIR__.'/../mailers/verification.php');
+        $message = ob_get_contents();
+        ob_end_clean();
 
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
         $subject = 'One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership';
-        $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
-        $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
-        $message .= '<br><p>We are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">Nonprofit Library</a>, enjoy!</p>';
         MemberHelper::send($to, $subject, $message, $headers);
     }
 
@@ -246,10 +248,11 @@ class MemberController
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
         $subject = "Thanks for visiting Nonprofit Library - Confirm Your Membership Today!";
-        $message = '<p>Thank you for visiting Nonprofit Library. We are frequently adding new FREE resources to help you and your nonprofit organization.</p>';
-        $message .= '<p>Confirm your membership today to have instant access to our entire resource library.<br>';
-        $message .= '<a href="' . $url . '">click to confirm your free membership</a></p>';
-        $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
+        
+        ob_start();
+        include(__DIR__.'/../mailers/second-reminder.php');
+        $message = ob_get_contents();
+        ob_end_clean();
         MemberHelper::send($to, $subject, $message, $headers);
     }
 
@@ -263,10 +266,11 @@ class MemberController
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
         $subject = "One Last Step! Confirm Your FREE Nonprofitlibrary.com Membership";
-        $message = '<p>Free Instant Access Educational Resources for Nonprofit Professionals!</p>';
-        $message = '<p>Just one <a href="' . $url . '">click to confirm your free membership</a></p>';
-        $message .= '<p>Your temporary password is: <b>' . $password . '</b></p>';
-        $message .= '<br><p>We are frequently adding more valuable free resources at <a href="nonprofitlibrary.com">Nonprofit Library</a>, enjoy!</p>';
+
+        ob_start();
+        include(__DIR__.'/../mailers/third-reminder.php');
+        $message = ob_get_contents();
+        ob_end_clean();
         MemberHelper::send($to, $subject, $message, $headers);
     }
 
