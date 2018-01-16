@@ -85,6 +85,54 @@
 	font-size: 21px;
 }
 
+.footer-content-area {
+	padding: 20px 0 0px !important;
+}
+
+.footer-wrapper {
+	color: #ffffff;
+	background: none !important;
+}
+
+.footer-wrapper h4 {
+	color: #ffffff;
+}
+
+.footer-wrapper .container {
+	display: flex;
+	align-items: center;
+}
+
+.footer-social-wrapper {
+	font-size: 20px;
+}
+
+.footer-social-network {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: #ffffff;
+	background: #4267b2;
+	height: 36px;
+	width: 36px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.footer-social-network.twitter {
+	background: #1da1f2;
+}
+
+.footer-social-network.linkedin {
+	background: #0084bf;
+}
+
+@media (max-width: 766px) {
+	.footer-wrapper .container {
+		display: block;
+	}
+}
+
 @media (max-width: 480px) {
 	.btn.gfsn-btn-join {
 		font-size: 16px;

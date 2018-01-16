@@ -30,6 +30,8 @@ class MemberInitializer {
 		add_action('edit_user_profile', array(&$this, 'showDownloadedProducts'), 50);
 		add_action('send_first_reminder_email', array(&$this, 'sendFirstReminderEmail'), 10, 1);
 		add_action('send_second_reminder_email', array(&$this, 'sendSecondReminderEmail'), 10, 1);
+
+		add_action('widgets_init', array(&$this, 'registerFooterWidget'));
 		
 		add_action('rest_api_init', function() {
 			register_rest_route( 'gfsn-api', '/membership', array(
@@ -122,6 +124,10 @@ class MemberInitializer {
 
 	public function sendSecondReminderEmail($user) {
 		$this->memberController->sendSecondConfirmationReminderEmail($user);
+	}
+
+	public function registerFooterWidget() {
+		register_widget('Member\\Widget\\FooterWidget');
 	}
 
 	public function addUserValidatedRow($val, $column, $userId) {

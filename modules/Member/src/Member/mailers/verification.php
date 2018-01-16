@@ -1,6 +1,6 @@
 <?php include_once 'header.php'; ?>
 <center>
-    <img src="http://nonprofitlibrary.com/wp-content/uploads/2017/12/Email-Header.png">
+    <img src="http://nonprofitlibrary.com/wp-content/uploads/2017/12/Email-Header.png" style="width: 100%;">
 </center>
 <p>Thank you for joining Nonprofit Library.<br>
 Just one more step to activate your account!  <a href="<?php echo $url ?>">Click here to finish your account setup.</a><br><br>

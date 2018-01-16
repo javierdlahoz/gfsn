@@ -44,3 +44,7 @@
 	opacity: 0.7;
 	color: #777;
 }
+
+.cp-search-holder {
+	display: none;
+}
