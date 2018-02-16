@@ -224,9 +224,6 @@ class MemberController
     private function sendConfirmEmail($email, $token, $password, $tag = null)
     {
         $url = home_url('/') . '?email_token=' . $token;
-        if ($tag) {
-            $url .= '&dtag=' . $tag;
-        }
         ob_start();
         include(__DIR__.'/../mailers/verification.php');
         $message = ob_get_contents();
@@ -241,9 +238,6 @@ class MemberController
     private function sendFirstReminderEmail($email, $token, $password, $tag = null)
     {
         $url = home_url('/') . '?email_token=' . $token;
-        if ($tag) {
-            $url .= '&dtag=' . $tag;
-        }
 
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;
@@ -259,9 +253,6 @@ class MemberController
     private function sendSecondReminderEmail($email, $token, $password, $tag = null)
     {
         $url = home_url('/') . '?email_token=' . $token;
-        if ($tag) {
-            $url .= '&dtag=' . $tag;
-        }
 
         $headers = 'From: info <' . get_option('admin_email') . '>';
         $to = $email;

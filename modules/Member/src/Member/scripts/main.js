@@ -1,7 +1,4 @@
 window.gfsn = angular.module('gfsn', []);
-jQuery(document).ready(function() {
-	watchDripTag();
-});
 function goTo(url) {
 	window.location.href = url;
 }
@@ -28,12 +25,3 @@ jQuery(document).ready(function() {
 		jQuery('#subscribeMemberModal #email').focus();
 	});
 });
-function watchDripTag() {
-	var tagName = 'dtag=';
-	if(window.location.search.indexOf(tagName) >= 0) {
-		var tags = window.location.search.split(tagName)[1].split('&');
-		if (tags[0]) {
-			localStorage.setItem('tag', tags[0]);
-		}
-	}
-}
