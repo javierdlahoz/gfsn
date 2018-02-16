@@ -23,8 +23,7 @@ if($user->ID === 0) {
 				<div>To change your password, enter a new password below:</div>
 				<input type="password" name="password" class="form-control" placeholder="Your Password" minLength="5">
 			</div>
-			<div class="alert alert-warning" id="validate-alert">Please Wait, validating your account</div>
-			<button id="validate-button" style="display: none" type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>
+			<button type="submit" class="btn btn-success btn-block">Save & Start to Download Content</button>
 		</form>
 	</div>
 </div>

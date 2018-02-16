@@ -4,7 +4,7 @@
 </center>
 <p>Thank you for joining Nonprofit Library.<br>
 Just one more step to activate your account! Click in the link below to finish your account setup.<br><br>
-<b><a href="<?php echo $url; ?>"><?php echo $url; ?></a></b>
+<?php echo $url; ?>
 <br><br>
 Your temporary password is: <b><?php echo $password; ?></b><br><br>
 Your Nonprofit Library membership includes:
