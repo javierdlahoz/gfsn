@@ -9,6 +9,10 @@ class ProductInitializer {
 
     function __construct() {
 
+        ini_set( 'upload_max_size' , '64M' );
+        ini_set( 'post_max_size', '64M');
+        ini_set( 'max_execution_time', '300' );
+
         $this->enqueStyles();
         add_action('wp_loaded', array(&$this, 'enqueScripts'), 99);
 

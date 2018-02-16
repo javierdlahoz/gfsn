@@ -10,7 +10,7 @@ if($user->ID === 0) {
 	<div class="col-md-6 col-md-offset-3">
 		<h2><?php the_title(); ?></h2>
 		<div class="alert alert-success">Please complete your first name and last name in the form below</div>
-		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form" onsubmit="return updateUserOnDrip();">
+		<form action="/wp-content/plugins/gfsn/gfsn.php" method="POST" class="validate-account-form">
 			<input type="hidden" name="validate_account" value="true">
 			<div class="form-group">
 				<label class="control-label required" id="first_name_label">This field is required *</label>
@@ -30,18 +30,10 @@ if($user->ID === 0) {
 </div>
 <script>
 	jQuery(document).ready(function() {
-		var user = {
-			email: '<?php echo $user->user_email; ?>'
-		};
-		subscribeUser(user);
 		toogleFirstNameRequiredLabel();
 		jQuery('#first_name').on('change', function() {
 			toogleFirstNameRequiredLabel();
 		});
-		setTimeout(function() {
-			jQuery('#validate-alert').hide();
-			jQuery('#validate-button').show();
-		}, 5000);
 	});
 
 	function toogleFirstNameRequiredLabel() {
@@ -51,15 +43,5 @@ if($user->ID === 0) {
 		} else {
 			jQuery('#first_name_label').show();
 		}
-	}
-
-	function updateUserOnDrip() {
-		var user = {
-			email: "<?php echo $user->user_login; ?>",
-			first_name: jQuery('#first_name').val(),
-			last_name: jQuery('#last_name').val()
-		};
-		updateSubscriberOnDrip(user);
-		return true;
 	}
 </script>

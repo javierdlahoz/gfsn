@@ -127,6 +127,11 @@
 	background: #0084bf;
 }
 
+.recommended-tab-area .tab-content .box {
+	max-height: 320px;
+	margin-bottom: 50px !important;
+}
+
 @media (max-width: 766px) {
 	.footer-wrapper .container {
 		display: block;

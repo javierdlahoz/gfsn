@@ -14,14 +14,4 @@ endif;
 if($_GET['subscribe'] === 'yes') :
 	$user = wp_get_current_user();
 ?>
-<script>
-	jQuery(document).ready(function() {
-		var user = {
-			email: '<?php echo $user->user_email; ?>',
-			first_name: '<?php echo $user->first_name; ?>',
-			last_name: '<?php echo $user->last_name; ?>'
-		};
-		subscribeUser(user);
-	});
-</script>
 <?php	endif;

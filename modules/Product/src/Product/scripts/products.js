@@ -38,7 +38,6 @@ function shareResourceToEmails() {
         }
     }
 
-    subscribeEmails(emails);
     shareResource({emails: emails, fname: fname, lname: lname});
     return false;
 }
@@ -46,12 +45,6 @@ function shareResourceToEmails() {
 function validateEmailFromList(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-}
-
-function subscribeEmails(emails) {
-    for (var i = 0; i < emails.length; i++) {
-        subscribeFreeShareRecipient(emails[i]);
-    }
 }
 
 function shareResource(form) {
